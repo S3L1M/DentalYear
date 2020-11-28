@@ -40,4 +40,7 @@ dependencies {
     // Expandable layout
     implementation 'net.cachapa.expandablelayout:expandablelayout:2.9.2'
 
+    // Bottom navigation bar
+    implementation 'np.com.susanthapa.curved_bottom_navigation:curved_bottom_navigation:0.6.3'
+
 }
