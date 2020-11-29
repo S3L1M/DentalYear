@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:background="@color/colorHowToCelebrate"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom_left_curve_background"
+        android:backgroundTint="@color/colorWhite"
+        android:padding="12dp">
+
+        <ImageView
+            android:id="@+id/home_recycler_view_top_item_country_logo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/usa_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/home_recycler_view_top_item_full_date_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/home_recycler_view_top_item_country_logo"
+            app:layout_constraintEnd_toStartOf="@id/home_recycler_view_top_item_arrow_right_icon"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toEndOf="@id/home_recycler_view_top_item_country_logo"
+            app:layout_constraintTop_toTopOf="@id/home_recycler_view_top_item_country_logo">
+
+            <TextView
+                android:id="@+id/home_recycler_view_top_item_month_day_num_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JULY 16"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/home_recycler_view_top_item_day_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="THURSDAY"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/home_recycler_view_top_item_arrow_right_icon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="12dp"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            app:layout_constraintBottom_toBottomOf="@id/home_recycler_view_top_item_date_picker"
+            app:layout_constraintEnd_toStartOf="@id/home_recycler_view_top_item_date_picker"
+            app:layout_constraintTop_toTopOf="@id/home_recycler_view_top_item_date_picker" />
+
+
+        <ImageView
+            android:id="@+id/home_recycler_view_top_item_date_picker"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_baseline_date_range_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="@id/home_recycler_view_top_item_date_picker"
+            app:layout_constraintStart_toStartOf="@id/home_recycler_view_top_item_country_logo"
+            app:layout_constraintTop_toBottomOf="@id/home_recycler_view_top_item_full_date_container">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:text="TODAY'S FUN HOLIDAY"
+                android:textColor="@color/colorTodayFunHoliday"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/get_to_know_your_customers"
+                android:textColor="@color/colorNavSelected"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/day"
+                android:textColor="@color/colorNavSelected"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

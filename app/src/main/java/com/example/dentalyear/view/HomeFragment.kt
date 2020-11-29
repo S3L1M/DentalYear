@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // init recyclerView
-        home_recycler_view.adapter = HomeAdapter(populateDummyData(), home_recycler_view)
+        home_recycler_view.adapter = HomeAdapter(requireContext(), populateDummyData(), home_recycler_view)
 
     }
 
