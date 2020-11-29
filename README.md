@@ -48,3 +48,8 @@
 | --- | ---|
 |Notes Font |  SF Pro Text Regular|
 |Videos Font | Open Sans Regular|
+
+## Screenshots
+| Home | Notes | Exhibits | Video |
+|------|-------|----------|-------|
+|!(/screenshots/home.png)[]| | |  |
