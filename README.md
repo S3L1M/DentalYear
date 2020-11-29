@@ -2,6 +2,7 @@
 ## Colors
 | Name | Color
 | --- | --- |
+|App Bar Title Color	|	#8AC9DF|
 |Dental text | 			#00395C|
 |Year Text 	|		#00A9EC|
 |Home Background	|		#AAE8FF|
@@ -37,7 +38,6 @@
 |Note: Start Writing Background |	#8AC9DF|
 |Note: Note title edit Color	| #676767|
 |Note: Note description color |	#8AC9DF|
-|App Bar Title Color	|	#8AC9DF|
 |Exhibits: App Bar Title |	#464646|
 |Exhibits: Item Button Background | #8DD5EF|
 |Exhibits: Want to be here |	#5FB7D6|
