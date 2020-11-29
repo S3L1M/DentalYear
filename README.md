@@ -52,4 +52,4 @@
 ## Screenshots
 | Home | Notes | Exhibits | Video |
 |------|-------|----------|-------|
-|!(/screenshots/home.png)[]| | |  |
+|![](/screenshots/home.png)| | |  |
