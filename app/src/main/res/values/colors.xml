@@ -5,4 +5,5 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="white">#FFFFFF</color>
     <color name="selectedText">#063760</color>
+    <color name="dots_color">#B9ECFF</color>
 </resources>
