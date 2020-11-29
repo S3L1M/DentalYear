@@ -1,17 +1,19 @@
 package com.example.dentalyear.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.dentalyear.R
 
 class MainActivity : AppCompatActivity() {
     private lateinit var nav: MeowBottomNavigation
-    private lateinit var mHomeTextView:TextView
-    private lateinit var mNotesTextView:TextView
-    private lateinit var mExhibitsTextView:TextView
-    private lateinit var mVideoTextView:TextView
+    private lateinit var mHomeTextView: TextView
+    private lateinit var mNotesTextView: TextView
+    private lateinit var mExhibitsTextView: TextView
+    private lateinit var mVideoTextView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         // onClickMenuListener event
         nav.setOnClickMenuListener {
-            when(it.id) {
+            when (it.id) {
                 1 -> showHome()
                 2 -> showNotes()
                 3 -> showExhibits()
@@ -51,6 +53,10 @@ class MainActivity : AppCompatActivity() {
         setSelectedTextColor(mHomeTextView)
 
         // Inflate fragment here
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<HomeFragment>(R.id.nav_host_fragment)
+        }
     }
 
     private fun showNotes() {
@@ -63,15 +69,23 @@ class MainActivity : AppCompatActivity() {
         setSelectedTextColor(mExhibitsTextView)
 
         // Inflate fragment here
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<ExhibitFragment>(R.id.nav_host_fragment)
+        }
     }
 
     private fun showVideo() {
         setSelectedTextColor(mVideoTextView)
 
         // Inflate fragment here
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<VideoFragment>(R.id.nav_host_fragment)
+        }
     }
 
-    private fun setSelectedTextColor(tv:TextView) {
+    private fun setSelectedTextColor(tv: TextView) {
         val defaultColor: Int = getColor(android.R.color.tab_indicator_text)
         mHomeTextView.setTextColor(defaultColor)
         mNotesTextView.setTextColor(defaultColor)
