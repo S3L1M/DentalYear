@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Dental Year</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="get_to_know_your_customers">Get to know Your Customers</string>
+    <string name="day">Day</string>
 </resources>

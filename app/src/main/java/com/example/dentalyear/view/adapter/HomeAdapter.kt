@@ -1,11 +1,19 @@
 package com.example.dentalyear.view.adapter
 
+import android.content.Context
+import android.graphics.*
+import android.graphics.drawable.GradientDrawable
+import android.graphics.drawable.ShapeDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.dynamicanimation.animation.SpringAnimation
 import androidx.dynamicanimation.animation.SpringForce
 import androidx.recyclerview.widget.RecyclerView
@@ -13,18 +21,52 @@ import com.example.dentalyear.R
 import com.example.dentalyear.data.model.HomeData
 import net.cachapa.expandablelayout.ExpandableLayout
 
-class HomeAdapter(private val data: List<HomeData>?, private val recyclerView: RecyclerView) :
-    RecyclerView.Adapter<HomeAdapter.MainViewHolder>() {
+class HomeAdapter(private val context: Context, private val data: List<HomeData>?, private val recyclerView: RecyclerView) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private var openedItems:MutableMap<Int, Boolean> = mutableMapOf()
+    companion object {
+        private const val TOP_BAR_SECTION = 0
+        private const val DEFAULT_SECTION = 1
+    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        MainViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.recycler_view_main_list_item, parent, false)
-        )
+    private var openedItems: MutableMap<Int, Boolean> = mutableMapOf()
 
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType) {
+            TOP_BAR_SECTION -> {
+                TopBarSectionViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.recycler_view_main_top_list_item, parent, false)
+                )
+            }
+            else -> {
+                MainViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.recycler_view_main_list_item, parent, false)
+                )
+            }
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder.itemViewType) {
+            DEFAULT_SECTION -> bindDefaultSection(holder as MainViewHolder, position)
+        }
+    }
+
+    private fun bindDefaultSection(holder: MainViewHolder, position: Int) {
+        Log.d("HomeAdapter", "Position: $position")
+        val itemColor:Int = chooseBackgroundColor(position)
+        val itemBackground:Int = chooseBackgroundColor(position+1)
+        val shapeDrawable = holder.itemContainer[0].background as GradientDrawable
+        shapeDrawable.color = ContextCompat.getColorStateList(context, itemColor)
+        if(position == 2)
+            holder.itemContainer.setBackgroundColor(Color.GREEN)
+        else if(position == 3)
+            holder.itemContainer.setBackgroundColor(Color.BLUE)
+//        val shapeDrawable2 = holder.itemContainer.background as GradientDrawable
+//        shapeDrawable2.color = ContextCompat.getColorStateList(context, itemBackground)
+        Log.d("HomeAdapter", "Position: $itemBackground")
         // Set item title
         holder.titleTextView.text = "${data?.get(position)?.title}"
         // Set item description (Expanded Text)
@@ -39,20 +81,49 @@ class HomeAdapter(private val data: List<HomeData>?, private val recyclerView: R
         }
         // Handle arrow click (Item click)
         holder.arrowExpandImageView.setOnClickListener {
-            if(openedItems[position] != null){
+            if (openedItems[position] != null) {
                 holder.expandableLayout.collapse()
                 openedItems.remove(position)
-            }else{
+            } else {
                 holder.expandableLayout.expand()
                 openedItems[position] = true
             }
         }
+    }
+
+    private fun chooseBackgroundColor(position: Int): Int{
+        return when(position){
+            1->R.color.colorHowToCelebrate
+            2->R.color.colorDailyMarketingWeb
+            3->R.color.colorDailyPosts
+            4->R.color.colorHowToMaximizePost
+            5->R.color.colorWeeklyMarketingExercise
+            6->R.color.colorMarketingTrendsAndNews
+            7->R.color.colorAdOfTheMonth
+            8->R.color.colorThisDateInHistory
+            9->R.color.colorIndustryEvents
+            10->R.color.colorLookingAhead
+            else->R.color.colorAppBackground
+        }
+    }
+
+    private fun bindTopBarSection(holder: TopBarSectionViewHolder) {
 
     }
 
     override fun getItemCount() = data?.size ?: 0
 
+    override fun getItemViewType(position: Int): Int {
+        return when (position) {
+            0 -> TOP_BAR_SECTION
+            else -> DEFAULT_SECTION
+        }
+    }
+
     class MainViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val itemContainer: ConstraintLayout =
+            itemView.findViewById(R.id.home_recycler_view_item_container)
+
         val titleTextView: TextView =
             itemView.findViewById(R.id.home_recycler_view_item_list_title)
 
@@ -76,5 +147,9 @@ class HomeAdapter(private val data: List<HomeData>?, private val recyclerView: R
                     .setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY)
                     .setStiffness(SpringForce.STIFFNESS_LOW)
             )
+    }
+
+    class TopBarSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
     }
 }

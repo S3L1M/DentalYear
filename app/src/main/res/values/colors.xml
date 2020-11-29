@@ -3,7 +3,20 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
-    <color name="white">#FFFFFF</color>
-    <color name="selectedText">#063760</color>
-    <color name="dots_color">#B9ECFF</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorNavSelected">#00395C</color>
+    <color name="colorNavUnSelected">#A3A3A3</color>
+    <color name="colorAppBackground">#AAE8FF</color>
+    <color name="colorYearText">#00A9EC</color>
+    <color name="colorTodayFunHoliday">#6BCDF4</color>
+    <color name="colorHowToCelebrate">#92E1FF</color>
+    <color name="colorDailyMarketingWeb">#63B9D9</color>
+    <color name="colorDailyPosts">#B9ECFF</color>
+    <color name="colorHowToMaximizePost">#318FB2</color>
+    <color name="colorWeeklyMarketingExercise">#8BC3D8</color>
+    <color name="colorMarketingTrendsAndNews">#49B2D9</color>
+    <color name="colorAdOfTheMonth">#41CCFF</color>
+    <color name="colorThisDateInHistory">#169FD2</color>
+    <color name="colorIndustryEvents">#65D5FF</color>
+    <color name="colorLookingAhead">#39BDEF</color>
 </resources>

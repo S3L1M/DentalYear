@@ -91,6 +91,6 @@ class MainActivity : AppCompatActivity() {
         mNotesTextView.setTextColor(defaultColor)
         mExhibitsTextView.setTextColor(defaultColor)
         mVideoTextView.setTextColor(defaultColor)
-        tv.setTextColor(getColor(R.color.selectedText))
+        tv.setTextColor(getColor(R.color.colorNavSelected))
     }
 }
