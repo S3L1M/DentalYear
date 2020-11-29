@@ -2,7 +2,6 @@ package com.example.dentalyear.view.adapter
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,7 +56,6 @@ class HomeAdapter(
     }
 
     private fun bindDefaultSection(holder: MainViewHolder, position: Int) {
-        Log.d("HomeAdapter", "Position: $position")
         val itemColor: Int = chooseBackgroundColor(position)
         val itemBackground: Int = chooseBackgroundColor(position + 1)
         val shapeDrawable = holder.itemContainer[0].background as GradientDrawable

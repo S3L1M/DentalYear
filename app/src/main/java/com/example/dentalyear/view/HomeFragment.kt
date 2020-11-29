@@ -32,7 +32,7 @@ class HomeFragment : Fragment() {
     private fun populateDummyData(): List<HomeData>{
         val dummyData: MutableList<HomeData> = mutableListOf()
 
-        for(i in 1..10){
+        for(i in 0..10){
             val homeData = HomeData("Title: $i", "Description: $i", R.drawable.analysis)
             dummyData.add(homeData)
         }

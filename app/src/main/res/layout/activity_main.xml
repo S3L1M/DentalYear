@@ -21,7 +21,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:background="#B6FDFF" />
+            android:background="@color/colorAppBackground" />
     </LinearLayout>
 
     <com.etebarian.meowbottomnavigation.MeowBottomNavigation
