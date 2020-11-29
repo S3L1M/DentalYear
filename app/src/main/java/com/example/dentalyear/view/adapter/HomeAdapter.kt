@@ -1,9 +1,7 @@
 package com.example.dentalyear.view.adapter
 
 import android.content.Context
-import android.graphics.*
 import android.graphics.drawable.GradientDrawable
-import android.graphics.drawable.ShapeDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -21,7 +19,11 @@ import com.example.dentalyear.R
 import com.example.dentalyear.data.model.HomeData
 import net.cachapa.expandablelayout.ExpandableLayout
 
-class HomeAdapter(private val context: Context, private val data: List<HomeData>?, private val recyclerView: RecyclerView) :
+class HomeAdapter(
+    private val context: Context,
+    private val data: List<HomeData>?,
+    private val recyclerView: RecyclerView
+) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     companion object {
@@ -56,17 +58,12 @@ class HomeAdapter(private val context: Context, private val data: List<HomeData>
 
     private fun bindDefaultSection(holder: MainViewHolder, position: Int) {
         Log.d("HomeAdapter", "Position: $position")
-        val itemColor:Int = chooseBackgroundColor(position)
-        val itemBackground:Int = chooseBackgroundColor(position+1)
+        val itemColor: Int = chooseBackgroundColor(position)
+        val itemBackground: Int = chooseBackgroundColor(position + 1)
         val shapeDrawable = holder.itemContainer[0].background as GradientDrawable
         shapeDrawable.color = ContextCompat.getColorStateList(context, itemColor)
-        if(position == 2)
-            holder.itemContainer.setBackgroundColor(Color.GREEN)
-        else if(position == 3)
-            holder.itemContainer.setBackgroundColor(Color.BLUE)
-//        val shapeDrawable2 = holder.itemContainer.background as GradientDrawable
-//        shapeDrawable2.color = ContextCompat.getColorStateList(context, itemBackground)
-        Log.d("HomeAdapter", "Position: $itemBackground")
+        holder.itemContainer.setBackgroundColor(context.resources.getColor(itemBackground))
+
         // Set item title
         holder.titleTextView.text = "${data?.get(position)?.title}"
         // Set item description (Expanded Text)
@@ -91,19 +88,19 @@ class HomeAdapter(private val context: Context, private val data: List<HomeData>
         }
     }
 
-    private fun chooseBackgroundColor(position: Int): Int{
-        return when(position){
-            1->R.color.colorHowToCelebrate
-            2->R.color.colorDailyMarketingWeb
-            3->R.color.colorDailyPosts
-            4->R.color.colorHowToMaximizePost
-            5->R.color.colorWeeklyMarketingExercise
-            6->R.color.colorMarketingTrendsAndNews
-            7->R.color.colorAdOfTheMonth
-            8->R.color.colorThisDateInHistory
-            9->R.color.colorIndustryEvents
-            10->R.color.colorLookingAhead
-            else->R.color.colorAppBackground
+    private fun chooseBackgroundColor(position: Int): Int {
+        return when (position) {
+            1 -> R.color.colorHowToCelebrate
+            2 -> R.color.colorDailyMarketingWeb
+            3 -> R.color.colorDailyPosts
+            4 -> R.color.colorHowToMaximizePost
+            5 -> R.color.colorWeeklyMarketingExercise
+            6 -> R.color.colorMarketingTrendsAndNews
+            7 -> R.color.colorAdOfTheMonth
+            8 -> R.color.colorThisDateInHistory
+            9 -> R.color.colorIndustryEvents
+            10 -> R.color.colorLookingAhead
+            else -> R.color.colorAppBackground
         }
     }
 
