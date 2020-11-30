@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     private fun showHome() {
         setSelectedTextColor(mHomeTextView)
 
-        // Inflate fragment here
+        // Inflate Home fragment
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace<HomeFragment>(R.id.nav_host_fragment)
@@ -62,13 +62,13 @@ class MainActivity : AppCompatActivity() {
     private fun showNotes() {
         setSelectedTextColor(mNotesTextView)
 
-        // Inflate fragment here
+        // Inflate Notes fragment
     }
 
     private fun showExhibits() {
         setSelectedTextColor(mExhibitsTextView)
 
-        // Inflate fragment here
+        // Inflate Exhibits fragment
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace<ExhibitFragment>(R.id.nav_host_fragment)
@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     private fun showVideo() {
         setSelectedTextColor(mVideoTextView)
 
-        // Inflate fragment here
+        // Inflate Video fragment
         supportFragmentManager.commit {
             setReorderingAllowed(true)
             replace<VideoFragment>(R.id.nav_host_fragment)
