@@ -28,6 +28,7 @@ class HomeAdapter(
     companion object {
         private const val TOP_BAR_SECTION = 0
         private const val DEFAULT_SECTION = 1
+        private const val BOTTOM_BAR_SECTION = 2
     }
 
     private var openedItems: MutableMap<Int, Boolean> = mutableMapOf()
@@ -38,6 +39,12 @@ class HomeAdapter(
                 TopBarSectionViewHolder(
                     LayoutInflater.from(parent.context)
                         .inflate(R.layout.recycler_view_main_top_list_item, parent, false)
+                )
+            }
+            BOTTOM_BAR_SECTION -> {
+                BottomBarSectionViewHolder(
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.recycler_view_main_bottom_list_item, parent, false)
                 )
             }
             else -> {
@@ -62,18 +69,21 @@ class HomeAdapter(
         shapeDrawable.color = ContextCompat.getColorStateList(context, itemColor)
         holder.itemContainer.setBackgroundColor(context.resources.getColor(itemBackground))
 
-        // Set item title
-        holder.titleTextView.text = "${data?.get(position)?.title}"
-        // Set item description (Expanded Text)
-        holder.descriptionTextView.text = "${data?.get(position)?.description}"
-        holder.expandableLayout.setInterpolator(OvershootInterpolator())
-        // Check for expansion state | scroll smoothly to clicked item
-        holder.expandableLayout.setOnExpansionUpdateListener { expansionFraction, state ->
-            run {
-                if (state == ExpandableLayout.State.EXPANDING)
-                    recyclerView.smoothScrollToPosition(position)
+        if (position <= (data?.size) as Int) {
+            // Set item title
+            holder.titleTextView.text = "${data?.get(position-1)?.title}"
+            // Set item description (Expanded Text)
+            holder.descriptionTextView.text = "${data?.get(position-1)?.description}"
+            holder.expandableLayout.setInterpolator(OvershootInterpolator())
+            // Check for expansion state | scroll smoothly to clicked item
+            holder.expandableLayout.setOnExpansionUpdateListener { _, state ->
+                run {
+                    if (state == ExpandableLayout.State.EXPANDING)
+                        recyclerView.smoothScrollToPosition(position-1)
+                }
             }
         }
+
         // Handle arrow click (Item click)
         holder.arrowExpandImageView.setOnClickListener {
             if (openedItems[position] != null) {
@@ -106,11 +116,12 @@ class HomeAdapter(
 
     }
 
-    override fun getItemCount() = data?.size ?: 0
+    override fun getItemCount() = (data?.size) as Int + 2
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             0 -> TOP_BAR_SECTION
+            11 -> BOTTOM_BAR_SECTION
             else -> DEFAULT_SECTION
         }
     }
@@ -144,7 +155,7 @@ class HomeAdapter(
             )
     }
 
-    class TopBarSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class TopBarSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    }
+    class BottomBarSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

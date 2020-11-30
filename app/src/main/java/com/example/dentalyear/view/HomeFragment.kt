@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.dentalyear.R
 import com.example.dentalyear.data.model.HomeData
 import com.example.dentalyear.view.adapter.HomeAdapter
@@ -32,7 +31,7 @@ class HomeFragment : Fragment() {
     private fun populateDummyData(): List<HomeData>{
         val dummyData: MutableList<HomeData> = mutableListOf()
 
-        for(i in 0..10){
+        for(i in 0..9){
             val homeData = HomeData("Title: $i", "Description: $i", R.drawable.analysis)
             dummyData.add(homeData)
         }
