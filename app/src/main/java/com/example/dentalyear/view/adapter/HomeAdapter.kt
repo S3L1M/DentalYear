@@ -71,15 +71,15 @@ class HomeAdapter(
 
         if (position <= (data?.size) as Int) {
             // Set item title
-            holder.titleTextView.text = "${data?.get(position-1)?.title}"
+            holder.titleTextView.text = "${data?.get(position - 1)?.title}"
             // Set item description (Expanded Text)
-            holder.descriptionTextView.text = "${data?.get(position-1)?.description}"
+            holder.descriptionTextView.text = "${data?.get(position - 1)?.description}"
             holder.expandableLayout.setInterpolator(OvershootInterpolator())
             // Check for expansion state | scroll smoothly to clicked item
             holder.expandableLayout.setOnExpansionUpdateListener { _, state ->
                 run {
                     if (state == ExpandableLayout.State.EXPANDING)
-                        recyclerView.smoothScrollToPosition(position-1)
+                        recyclerView.smoothScrollToPosition(position - 1)
                 }
             }
         }
@@ -116,12 +116,12 @@ class HomeAdapter(
 
     }
 
-    override fun getItemCount() = (data?.size) as Int + 2
+    override fun getItemCount() = data?.size?.plus(2) ?: 0
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             0 -> TOP_BAR_SECTION
-            11 -> BOTTOM_BAR_SECTION
+            data?.size?.inc() -> BOTTOM_BAR_SECTION
             else -> DEFAULT_SECTION
         }
     }
