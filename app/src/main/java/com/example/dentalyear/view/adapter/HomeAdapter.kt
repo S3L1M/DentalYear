@@ -38,19 +38,19 @@ class HomeAdapter(
             TOP_BAR_SECTION -> {
                 TopBarSectionViewHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.recycler_view_main_top_list_item, parent, false)
+                        .inflate(R.layout.recycler_view_home_top_list_item, parent, false)
                 )
             }
             BOTTOM_BAR_SECTION -> {
                 BottomBarSectionViewHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.recycler_view_main_bottom_list_item, parent, false)
+                        .inflate(R.layout.recycler_view_home_bottom_list_item, parent, false)
                 )
             }
             else -> {
                 MainViewHolder(
                     LayoutInflater.from(parent.context)
-                        .inflate(R.layout.recycler_view_main_list_item, parent, false)
+                        .inflate(R.layout.recycler_view_home_list_item, parent, false)
                 )
             }
         }

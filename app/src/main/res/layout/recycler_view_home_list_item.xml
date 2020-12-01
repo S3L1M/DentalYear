@@ -44,7 +44,7 @@
 
 
         <include
-            layout="@layout/recycler_view_main_expandable_item"
+            layout="@layout/recycler_view_home_expandable_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
