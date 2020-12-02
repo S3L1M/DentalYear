@@ -8,10 +8,13 @@
 
     <ImageButton
         android:id="@+id/video_fragment_save_image_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
         android:adjustViewBounds="true"
-        android:padding="10dp"
+        android:background="@drawable/image_button_corner_radius"
+        android:padding="8dp"
         android:scaleType="fitCenter"
         android:src="@drawable/save"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,57 +42,84 @@
         app:layout_constraintTop_toBottomOf="@id/video_fragment_category_options_text_view" />
 
     <com.google.android.material.tabs.TabLayout
+
         android:id="@+id/video_fragment_tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="0dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/video_fragment_category_options_subtitle_text_view"
         app:tabBackground="@drawable/tab_color_selector"
         app:tabIndicatorHeight="0dp"
+        app:tabPaddingEnd="0dp"
+        app:tabPaddingStart="0dp"
         app:tabSelectedTextColor="@color/colorWhite"
+        app:tabTextAppearance="@style/MyCustomTabTextAppearance"
         app:tabTextColor="@color/colorNavUnSelected">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Item 1" />
+            android:text="Fun Vibes" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Item 1" />
+            android:text="Oral-health Tips" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Item 1" />
+            android:text="Smile Quotes" />
     </com.google.android.material.tabs.TabLayout>
 
     <ScrollView
         android:id="@+id/video_fragment_content_container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginVertical="20dp"
+        android:layout_marginTop="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/video_fragment_tabLayout">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <FrameLayout
+            <com.google.android.exoplayer2.ui.PlayerView
+                android:id="@+id/video_fragment_playerView"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
-                <com.google.android.exoplayer2.ui.PlayerView
-                    android:id="@+id/video_fragment_video_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </FrameLayout>
+                android:layout_height="200dp"
+                app:layout_constraintBottom_toBottomOf="@+id/video_fragment_video_thumbnail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/video_fragment_video_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/usa_logo" />
+
+            <ImageView
+                android:id="@+id/video_fragment_play_button_image_view"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/play_button"
+                app:layout_constraintBottom_toBottomOf="@id/video_fragment_video_thumbnail"
+                app:layout_constraintEnd_toEndOf="@+id/video_fragment_video_thumbnail"
+                app:layout_constraintStart_toStartOf="@id/video_fragment_video_thumbnail"
+                app:layout_constraintTop_toBottomOf="@id/video_fragment_video_thumbnail"
+                app:layout_constraintTop_toTopOf="@id/video_fragment_video_thumbnail"
+                app:tint="@color/colorBlack" />
 
             <TextView
                 android:id="@+id/video_fragment_video_title"
@@ -99,7 +129,9 @@
                 android:text="Video title"
                 android:textColor="@color/colorBlack"
                 android:textSize="@dimen/title_font_size"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/video_fragment_video_thumbnail" />
 
             <TextView
                 android:id="@+id/video_fragment_video_duration"
@@ -108,15 +140,23 @@
                 android:layout_marginStart="8dp"
                 android:text="duration"
                 android:textColor="@color/colorNavUnSelected"
-                android:textSize="@dimen/subtitle_font_size" />
+                android:textSize="@dimen/subtitle_font_size"
+                app:layout_constraintStart_toStartOf="@id/video_fragment_video_title"
+                app:layout_constraintTop_toBottomOf="@id/video_fragment_video_title" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/video_fragment_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp" />
+                android:layout_marginTop="10dp"
+                android:background="@color/colorAppBackground"
+                android:padding="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/video_fragment_video_duration"
+                app:layout_constraintTop_toBottomOf="@id/video_fragment_video_duration" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </LinearLayout>
+
     </ScrollView>
 
     <ProgressBar
