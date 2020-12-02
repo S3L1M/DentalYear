@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dentalyear.R
@@ -28,7 +27,6 @@ class ExhibitAdapter(
     }
 
     override fun onBindViewHolder(holder: ExhibitViewHolder, position: Int) {
-        holder.itemView.findViewById<TextView>(R.id.exhibit_text).text = "Position: $position"
         data?.get(position)?.let { exhibit ->
             Glide.with(context).load(exhibit.acf.sponsorLogo).into(holder.logoImageView)
             holder.itemView.setOnClickListener {

@@ -48,8 +48,11 @@
 | --- | ---|
 |Notes Font |  SF Pro Text Regular|
 |Videos Font | Open Sans Regular|
-
 ## Screenshots
 | Home | Notes | Exhibits | Video |
 |------|-------|----------|-------|
-|![](/screenshots/home.png)| | |  |
+|![](/screenshots/home.png)| |![](/screenshots/exhibit.png)| ![](/screenshots/video.png) |
+|------|-------|----------|-------|
+|![](/screenshots/home.png)| |![](/screenshots/exhibit_details.png)| ![](/screenshots/video2.png) |
+|------|-------|----------|-------|
+|![](/screenshots/home.png)| | | ![](/screenshots/video3.png) |

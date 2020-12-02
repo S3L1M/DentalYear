@@ -34,7 +34,7 @@
         android:padding="20dp"
         android:text="Exhibits"
         android:textColor="@color/colorBlack"
-        android:textSize="@dimen/headers_font_size"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="@id/fragment_exhibit_top_app_bar"
         app:layout_constraintEnd_toEndOf="@id/fragment_exhibit_top_app_bar"
         app:layout_constraintHorizontal_bias="0.19"
