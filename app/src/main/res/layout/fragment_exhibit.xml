@@ -1,14 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorExhibitBackground"
     tools:context=".view.ExhibitFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/fragment_exhibit_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Exhibit Fragment" />
+        android:layout_height="0dp"
+        android:paddingTop="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_exhibit_top_app_bar"
+        tools:listitem="@layout/recycler_view_exhibits_list_item" />
 
-</FrameLayout>
+    <View
+        android:id="@+id/fragment_exhibit_top_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/bottom_left_curve_top_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="Exhibits"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/headers_font_size"
+        app:layout_constraintBottom_toBottomOf="@id/fragment_exhibit_top_app_bar"
+        app:layout_constraintEnd_toEndOf="@id/fragment_exhibit_top_app_bar"
+        app:layout_constraintHorizontal_bias="0.19"
+        app:layout_constraintStart_toStartOf="@id/fragment_exhibit_top_app_bar" />
+
+    <ProgressBar
+        android:id="@+id/fragment_exhibit_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
