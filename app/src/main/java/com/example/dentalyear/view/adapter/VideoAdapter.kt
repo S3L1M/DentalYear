@@ -1,19 +1,21 @@
 package com.example.dentalyear.view.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.dentalyear.R
 import com.example.dentalyear.data.model.VideoModel
 import com.example.dentalyear.utils.VideoItemClickListener
-import com.squareup.picasso.Picasso
 
 class VideoAdapter(
-    private var data: List<VideoModel>? = null,
-    private val itemClicked: VideoItemClickListener
+    private val context: Context,
+    private val itemClicked: VideoItemClickListener,
+    private var data: List<VideoModel>? = null
 ) : RecyclerView.Adapter<VideoAdapter.VideoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideoViewHolder {
@@ -27,7 +29,7 @@ class VideoAdapter(
         data?.get(position)?.let { video ->
             holder.videoTitleTextView.text = video.videoTitle
             holder.durationTextView.text = video.videoDuration
-            Picasso.get().load(video.acf.thumbImage).into(holder.videoThumbnail)
+            Glide.with(context).load(video.acf.thumbImage).into(holder.videoThumbnail)
 
             holder.itemView.setOnClickListener {
                 itemClicked.onVideoItemClicked(position, video)

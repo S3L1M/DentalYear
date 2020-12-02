@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.dentalyear.R
 import com.example.dentalyear.data.model.VideoModel
 import com.example.dentalyear.utils.Status
@@ -18,7 +19,6 @@ import com.example.dentalyear.viewmodel.MainViewModel
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.material.tabs.TabLayout
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_video.*
 
 
@@ -33,8 +33,9 @@ class VideoFragment : Fragment(), VideoItemClickListener {
     private var playBackPosition: Long = 0
     private lateinit var adapter: VideoAdapter
     private lateinit var video: VideoModel
+
     // Default index for video from videos list is 0
-    private  var position: Int = 0
+    private var position: Int = 0
     private val dummyVideos = mutableListOf<String>()
 
 
@@ -99,7 +100,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
             initPlayer(dummyVideos[position])
         }
         // TabLayout listener
-        video_fragment_tabLayout.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+        video_fragment_tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 /**
                  * TODO: Handle onTapSelected event
@@ -121,8 +122,8 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         })
     }
 
-    private fun populateDummyData(){
-        for(i in 1..10){
+    private fun populateDummyData() {
+        for (i in 1..10) {
             dummyVideos.add("https://developers.google.com/training/images/tacoma_narrows.mp4")
             dummyVideos.add("https://storage.googleapis.com/exoplayer-test-media-0/play.mp3")
         }
@@ -139,7 +140,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
     private fun initRecyclerViewAdapter() {
         video_fragment_recycler_view.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        adapter = VideoAdapter(itemClicked = this)
+        adapter = VideoAdapter(requireContext(), this)
         video_fragment_recycler_view.adapter = adapter
     }
 
@@ -164,7 +165,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         }
     }
 
-    private fun resetPlayer(){
+    private fun resetPlayer() {
         video_fragment_playerView?.player?.let {
             playBackPosition = 0
             it.release()
@@ -207,13 +208,13 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         setVideoData(video)
     }
 
-    private fun setVideoData(video: VideoModel){
+    private fun setVideoData(video: VideoModel) {
         video_fragment_video_title.text = video.videoTitle
         video_fragment_video_duration.text = video.videoDuration
         setThumbnail(video.acf.thumbImage)
     }
 
-    private fun setThumbnail(url: String){
+    private fun setThumbnail(url: String) {
         /*
          * Show thumbnail for the first time the of the Fragment
          * or
@@ -226,6 +227,6 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         // Hide video_view
         video_fragment_playerView.visibility = View.INVISIBLE
 
-        Picasso.get().load(url).into(video_fragment_video_thumbnail)
+        Glide.with(requireContext()).load(url).into(video_fragment_video_thumbnail)
     }
 }
