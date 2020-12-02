@@ -20,4 +20,6 @@
     <color name="colorThisDateInHistory">#169FD2</color>
     <color name="colorIndustryEvents">#65D5FF</color>
     <color name="colorLookingAhead">#39BDEF</color>
+    <color name="colorExhibitBackground">#52ADCE</color>
+    <color name="colorExhibitDetailsButtonBackground">#8DD5EF</color>
 </resources>

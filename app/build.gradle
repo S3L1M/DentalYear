@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'org.jetbrains.kotlin.android.extensions'
 
 android {
     compileSdkVersion 30
@@ -35,6 +36,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    androidExtensions {
+        experimental = true
     }
 }
 
@@ -76,7 +81,8 @@ dependencies {
     // Exoplayer for playing media content
     implementation 'com.google.android.exoplayer:exoplayer:2.12.2'
 
-    // Picasso
-    implementation 'com.squareup.picasso:picasso:2.71828'
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
 }
