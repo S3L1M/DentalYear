@@ -1,5 +1,6 @@
 package com.example.dentalyear.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.dentalyear.data.api.DentalApi
@@ -38,16 +39,18 @@ class MainRepository {
                 // data is successfully loaded | send success signal
                 if (response.body() != null) {
                     videoLiveData.postValue(Resource.success(response.body()))
+                    Log.d("MainViewModel", "Everything is okay in Repo")
                     return
                 }
 
                 // Check if data is null
                 videoLiveData.postValue(Resource.error(null, "data is null"))
-
+                Log.d("MainViewModel", "Here From Repo")
             }
 
             override fun onFailure(call: Call<List<VideoModel>>, t: Throwable) {
                 // data is failed to load | send error signal
+                Log.d("MainViewModel", "Also here from Repo")
                 videoLiveData.postValue(Resource.error(null, t.message.toString()))
             }
         })
