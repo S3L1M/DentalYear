@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.dentalyear.data.model.ExhibitModel
 import com.example.dentalyear.data.model.VideoModel
 import com.example.dentalyear.data.repository.MainRepository
 import com.example.dentalyear.utils.Resource
@@ -11,6 +12,7 @@ import com.example.dentalyear.utils.Resource
 class MainViewModel: ViewModel() {
     private val mainRepository = MainRepository()
     private lateinit var videoLiveData:LiveData<Resource<List<VideoModel>>>
+    private lateinit var exhibitLiveData: LiveData<Resource<List<ExhibitModel>>>
 //    private val isVideoLiveDataFetchedMap = MutableLiveData<Boolean>(false)
 
 
@@ -24,5 +26,10 @@ class MainViewModel: ViewModel() {
 //        }
 //        Log.d("MainViewModel", "Finally...")
         return videoLiveData
+    }
+
+    fun getExhibits(): LiveData<Resource<List<ExhibitModel>>>{
+        exhibitLiveData = mainRepository.getExhibits()
+        return exhibitLiveData
     }
 }

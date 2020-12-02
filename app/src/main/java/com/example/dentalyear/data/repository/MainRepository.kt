@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.dentalyear.data.api.DentalApi
+import com.example.dentalyear.data.model.ExhibitModel
 import com.example.dentalyear.data.model.VideoModel
 import com.example.dentalyear.utils.Resource
 import com.example.dentalyear.utils.Utility
@@ -16,6 +17,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class MainRepository {
     private var api: DentalApi
     private val videoLiveData = MutableLiveData<Resource<List<VideoModel>>>()
+    private val exhibitLiveData = MutableLiveData<Resource<List<ExhibitModel>>>()
 
     init {
         val retrofit = Retrofit.Builder()
@@ -55,5 +57,31 @@ class MainRepository {
             }
         })
         return videoLiveData
+    }
+
+    // Get exhibits list
+    fun getExhibits(): LiveData<Resource<List<ExhibitModel>>>{
+        exhibitLiveData.postValue(Resource.loading(null))
+
+        api.getSponsors().enqueue(object: Callback<List<ExhibitModel>>{
+            override fun onResponse(
+                call: Call<List<ExhibitModel>>,
+                response: Response<List<ExhibitModel>>
+            ) {
+                // data is successfully loaded | send success signal
+                if (response.body() != null) {
+                    exhibitLiveData.postValue(Resource.success(response.body()))
+                    return
+                }
+
+                // Check if data is null
+                exhibitLiveData.postValue(Resource.error(null, "data is null"))
+            }
+
+            override fun onFailure(call: Call<List<ExhibitModel>>, t: Throwable) {
+                exhibitLiveData.postValue(Resource.error(null, t.message.toString()))
+            }
+        })
+        return exhibitLiveData
     }
 }
