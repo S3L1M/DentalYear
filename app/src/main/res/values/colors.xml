@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
     <color name="colorNavSelected">#00395C</color>
     <color name="colorNavUnSelected">#A3A3A3</color>
     <color name="colorAppBackground">#AAE8FF</color>
