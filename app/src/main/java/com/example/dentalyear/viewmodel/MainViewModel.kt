@@ -1,35 +1,27 @@
 package com.example.dentalyear.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.dentalyear.data.model.ExhibitModel
 import com.example.dentalyear.data.model.VideoModel
 import com.example.dentalyear.data.repository.MainRepository
 import com.example.dentalyear.utils.Resource
 
-class MainViewModel: ViewModel() {
+class MainViewModel : ViewModel() {
     private val mainRepository = MainRepository()
-    private lateinit var videoLiveData:LiveData<Resource<List<VideoModel>>>
-    private lateinit var exhibitLiveData: LiveData<Resource<List<ExhibitModel>>>
-//    private val isVideoLiveDataFetchedMap = MutableLiveData<Boolean>(false)
+    private var videoLiveData: LiveData<Resource<List<VideoModel>>>?= null
+    private var exhibitLiveData: LiveData<Resource<List<ExhibitModel>>>?=null
 
 
-    fun getVideos(): LiveData<Resource<List<VideoModel>>>{
-        // TODO: VERY IMPORTANT ADD SOME CONDITION SO THAT "getVideos()" DOESN'T GET CALLED EACH TIME
-//        Log.d("MainViewModel", "Outside if statement")
-//        if(isVideoLiveDataFetchedMap.value == false){
-//            Log.d("MainViewModel", "Inside if statement")
+    fun getVideos(): LiveData<Resource<List<VideoModel>>> {
+        if(videoLiveData == null)
             videoLiveData = mainRepository.getVideos()
-//            isVideoLiveDataFetchedMap.postValue(true)
-//        }
-//        Log.d("MainViewModel", "Finally...")
-        return videoLiveData
+        return videoLiveData as LiveData<Resource<List<VideoModel>>>
     }
 
-    fun getExhibits(): LiveData<Resource<List<ExhibitModel>>>{
-        exhibitLiveData = mainRepository.getExhibits()
-        return exhibitLiveData
+    fun getExhibits(): LiveData<Resource<List<ExhibitModel>>> {
+        if(exhibitLiveData == null)
+            exhibitLiveData = mainRepository.getExhibits()
+        return exhibitLiveData as LiveData<Resource<List<ExhibitModel>>>
     }
 }

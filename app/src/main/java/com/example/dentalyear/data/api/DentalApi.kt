@@ -7,7 +7,7 @@ import retrofit2.http.GET
 
 
 interface DentalApi {
-    @GET("video")
+    @GET("video?per_page=100")
     fun getVideos(): Call<List<VideoModel>>
 
     @GET("sponsor")
