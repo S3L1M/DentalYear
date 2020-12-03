@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.dentalyear.R
@@ -24,19 +24,11 @@ import kotlinx.android.synthetic.main.fragment_video.*
 
 class VideoFragment : Fragment(), VideoItemClickListener {
 
-    companion object {
-        private const val PLAYBACK_TIME = "playback_time"
-        private const val PLAY_WHEN_READY = "play_when_ready"
-    }
-
-    private var playWhenReady: Boolean = true
-    private var playBackPosition: Long = 0
     private lateinit var adapter: VideoAdapter
     private lateinit var video: VideoModel
-
-    // Default index for video from videos list is 0
-    private var position: Int = 0
-    private val dummyVideos = mutableListOf<String>()
+    private val funVibesList = mutableListOf<VideoModel>()
+    private val oralHealthTipsList = mutableListOf<VideoModel>()
+    private val smileQuotesList = mutableListOf<VideoModel>()
 
 
     override fun onCreateView(
@@ -50,15 +42,8 @@ class VideoFragment : Fragment(), VideoItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Get the current position and play/pause | if there is any configuration changes
-        savedInstanceState?.let {
-            playBackPosition = it.getLong(PLAYBACK_TIME)
-            playWhenReady = it.getBoolean(PLAY_WHEN_READY)
-        }
-
         // Define ViewModel
-        val viewModel: MainViewModel by viewModels()
-
+        val viewModel: MainViewModel by activityViewModels()
 
         /**
          * Init Visibility of the views
@@ -76,58 +61,45 @@ class VideoFragment : Fragment(), VideoItemClickListener {
             } else if (videos.status == Status.SUCCESS) {
                 video_fragment_progressbar.visibility = View.INVISIBLE
                 changeViewVisibility(View.VISIBLE)
-                Log.d("VideoFragment", "Status Data: ${videos.status}")
-                Log.d("VideoFragment", "Message: ${videos.message}")
-                Log.d("VideoFragment", "${videos.data?.size}")
-                adapter.setData(videos.data)
-                video = videos.data?.get(0)!!
-                setVideoData(video)
+                // Prepare data
+                prepareData(videos.data!!)
+                // Set the default data to funVibes
+                setAdapterData(funVibesList)
             }
         })
-
-        // populate dummyData
-        populateDummyData()
 
         /*
          * Init view listener
          */
         // thumbnail click listener
         video_fragment_video_thumbnail.setOnClickListener {
-            initPlayer(dummyVideos[position])
+//            initPlayer(dummyVideos[position])
+            initPlayer(video.videoLink)
         }
         // playButton click listener
         video_fragment_play_button_image_view.setOnClickListener {
-            initPlayer(dummyVideos[position])
+//            initPlayer(dummyVideos[position])
+            initPlayer(video.videoLink)
         }
         // TabLayout listener
         video_fragment_tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                /**
-                 * TODO: Handle onTapSelected event
-                 * I cannot configure how to get videos from category | from API
-                 * URL: https://dentalyear.com/wp-json/wp/v2/
-                 * endpoint: /video
-                 * endpoint: /videocategory
-                 */
+                when (tab?.position) {
+                    0 -> setAdapterData(funVibesList)
+                    1 -> setAdapterData(oralHealthTipsList)
+                    2 -> setAdapterData(smileQuotesList)
+                }
                 Log.d("VideoFragment", "Position: ${tab?.position}")
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
             }
         })
     }
 
-    private fun populateDummyData() {
-        for (i in 1..10) {
-            dummyVideos.add("https://developers.google.com/training/images/tacoma_narrows.mp4")
-            dummyVideos.add("https://storage.googleapis.com/exoplayer-test-media-0/play.mp3")
-        }
-    }
 
     private fun changeViewVisibility(visibility: Int) {
         video_fragment_category_options_text_view.visibility = visibility
@@ -144,73 +116,64 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         video_fragment_recycler_view.adapter = adapter
     }
 
+    /*
+    * prepare videos list
+    * by appending each video to its category
+     */
+    private fun prepareData(videos: List<VideoModel>) {
+        for (video in videos) {
+            for (category in video.acf.videoCategory) {
+                when (category.id) {
+                    // Fun Vibes Id
+                    5524 -> funVibesList.add(video)
+                    // Oral Health Id
+                    5521 -> oralHealthTipsList.add(video)
+                    // Smile Quotes Id
+                    5518 -> smileQuotesList.add(video)
+                }
+            }
+        }
+    }
+
     private fun initPlayer(url: String) {
         val player = SimpleExoPlayer.Builder(requireContext()).build()
-        // If the user clicked on thumbnail | hide it and playButton to show the video player behind it
+        /*
+        *If the user clicked on thumbnail
+        * hide thumbnail and playButton imageView
+        * to show the video player behind it
+         */
         video_fragment_video_thumbnail.visibility = View.INVISIBLE
         video_fragment_play_button_image_view.visibility = View.INVISIBLE
         video_fragment_playerView.visibility = View.VISIBLE
         video_fragment_playerView.player = player
         player.setMediaItem(MediaItem.fromUri(url))
-        player.playWhenReady = playWhenReady
-        player.seekTo(playBackPosition)
+        player.playWhenReady = true
+        player.seekTo(0)
         player.prepare()
     }
 
-    private fun releasePlayer() {
-        video_fragment_playerView?.player?.let {
-            playWhenReady = it.playWhenReady
-            playBackPosition = it.currentPosition
-            it.release()
-        }
-    }
-
-    private fun resetPlayer() {
-        video_fragment_playerView?.player?.let {
-            playBackPosition = 0
-            it.release()
-        }
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        video_fragment_playerView.player?.let {
-            outState.putLong(
-                PLAYBACK_TIME,
-                it.currentPosition
-            )
-            outState.putBoolean(
-                PLAY_WHEN_READY,
-                it.playWhenReady
-            )
-        }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N)
-            releasePlayer()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            releasePlayer()
-    }
 
     override fun onVideoItemClicked(position: Int, data: VideoModel) {
         Log.d("VideoFragment", "Position: $position")
-        // reset player if the user click on onther video
-        resetPlayer()
-        // Set thumbnail to video_view
-        video = data
-        this.position = position
-        setVideoData(video)
+        // release player if the user click on onther video
+        releasePlayer()
+        // TODO : Remove position
+//        this.position = position
+        setVideoData(data)
+    }
+
+    private fun setAdapterData(videos: List<VideoModel>) {
+        // release player if the user clicked on the tabs
+        releasePlayer()
+        setVideoData(videos[0])
+        adapter.setData(videos)
     }
 
     private fun setVideoData(video: VideoModel) {
         video_fragment_video_title.text = video.videoTitle
         video_fragment_video_duration.text = video.videoDuration
+        // Keep the video to play it when needed
+        this.video = video
         setThumbnail(video.acf.thumbImage)
     }
 
@@ -228,5 +191,21 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         video_fragment_playerView.visibility = View.INVISIBLE
 
         Glide.with(requireContext()).load(url).into(video_fragment_video_thumbnail)
+    }
+
+    private fun releasePlayer() {
+        video_fragment_playerView?.player?.release()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N)
+            releasePlayer()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            releasePlayer()
     }
 }

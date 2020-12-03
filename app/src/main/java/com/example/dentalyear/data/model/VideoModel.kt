@@ -14,7 +14,20 @@ data class VideoModel(
     var videoDownloadLink: String,
     @SerializedName("video_duration")
     var videoDuration: String,
-    var acf: VideoAcf
+    var acf: VideoAcf,
 )
 
-data class VideoAcf(@SerializedName("thumb_image")var thumbImage:String)
+data class VideoAcf(
+    @SerializedName("thumb_image") var thumbImage: String,
+    @SerializedName("category")
+    var videoCategory: List<VideoCategory>,
+)
+
+data class VideoCategory(
+    @SerializedName("ID")
+    var id: Int,
+    @SerializedName("post_date")
+    var postDate: String,
+    @SerializedName("post_title")
+    var postTitle: String,
+)

@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import com.example.dentalyear.R
 import com.example.dentalyear.data.model.ExhibitModel
 import com.example.dentalyear.utils.ExhibitItemClickListener
@@ -44,7 +44,8 @@ class ExhibitFragment : Fragment(), ExhibitItemClickListener {
         fragment_exhibit_recycler_view.adapter = adapter
 
         // Define ViewModel
-        val viewModel: MainViewModel by viewModels()
+        val viewModel: MainViewModel by activityViewModels()
+
 
         // Get Exhibits
         viewModel.getExhibits().observe(viewLifecycleOwner, { exhibits ->

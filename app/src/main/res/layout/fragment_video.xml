@@ -42,8 +42,8 @@
         app:layout_constraintTop_toBottomOf="@id/video_fragment_category_options_text_view" />
 
     <com.google.android.material.tabs.TabLayout
-
         android:id="@+id/video_fragment_tabLayout"
+        style="@style/MyCustomTabTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -51,13 +51,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/video_fragment_category_options_subtitle_text_view"
-        app:tabBackground="@drawable/tab_color_selector"
         app:tabIndicatorHeight="0dp"
         app:tabPaddingEnd="0dp"
-        app:tabPaddingStart="0dp"
-        app:tabSelectedTextColor="@color/colorWhite"
-        app:tabTextAppearance="@style/MyCustomTabTextAppearance"
-        app:tabTextColor="@color/colorNavUnSelected">
+        app:tabPaddingStart="0dp">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
