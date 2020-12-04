@@ -16,8 +16,8 @@ interface DentalApi {
     fun getSponsors(): Call<List<ExhibitModel>>
 
     @GET("prompt")
-    fun getPrompts(
+    suspend fun getPrompts(
         @Query("filter[meta_value]") filterValue: String,
         @Query("filter[meta_key]") filterKey: String = "prompt_date"
-    ): Call<List<HomeModel>>
+    ): List<HomeModel>
 }

@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.example.dentalyear.R
 import com.example.dentalyear.data.model.HomeModel
 import com.example.dentalyear.utils.Status
 import com.example.dentalyear.utils.Utility
 import com.example.dentalyear.view.adapter.HomeAdapter
 import com.example.dentalyear.viewmodel.MainViewModel
+import com.example.dentalyear.viewmodel.MainViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -43,7 +45,8 @@ class HomeFragment : Fragment() {
         changeViewVisibility(View.INVISIBLE)
 
         // Define viewModel
-        val viewModel: MainViewModel by activityViewModels()
+        val viewModel = ViewModelProvider(requireActivity(), MainViewModelFactory(requireActivity().application))
+            .get(MainViewModel::class.java)
 
 
         /*
@@ -52,18 +55,22 @@ class HomeFragment : Fragment() {
         // prompts listener
         val simpleDateFormat = SimpleDateFormat("yyyyMMdd").format(Date())
         viewModel.getPrompts(simpleDateFormat)?.observe(viewLifecycleOwner, { prompts ->
+            Log.d("HomeFragment", "Inside BIIG")
             when (prompts.status) {
                 Status.LOADING -> {
                     home_fragment_progress_bar.visibility = View.VISIBLE
                     Log.d("HomeFragment", "Loading")
                 }
                 Status.SUCCESS -> {
+                    Log.d("HomeFragment", "Success")
                     prepareData(prompts.data!!)
                     // change visibility to visible
                     home_fragment_progress_bar.visibility = View.INVISIBLE
                     changeViewVisibility(View.VISIBLE)
                     // Set adapter based on the country
-                    adapter.setData(usaPrompt!!)
+                    usaPrompt?.let {
+                        adapter.setData(it)
+                    }
                 }
                 Status.ERROR -> {
                     Log.d("HomeFragment", "Error: ${prompts.message}")
