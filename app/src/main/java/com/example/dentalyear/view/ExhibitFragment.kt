@@ -48,7 +48,7 @@ class ExhibitFragment : Fragment(), ExhibitItemClickListener {
 
 
         // Get Exhibits
-        viewModel.getExhibits().observe(viewLifecycleOwner, { exhibits ->
+        viewModel.getExhibits()?.observe(viewLifecycleOwner, { exhibits ->
             if (exhibits.status == Status.LOADING) {
                 fragment_exhibit_progress_bar.visibility = View.VISIBLE
             } else if (exhibits.status == Status.SUCCESS) {

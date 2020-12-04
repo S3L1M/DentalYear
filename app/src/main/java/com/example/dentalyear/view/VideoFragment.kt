@@ -55,7 +55,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         initRecyclerViewAdapter()
 
         // Get Videos
-        viewModel.getVideos().observe(viewLifecycleOwner, { videos ->
+        viewModel.getVideos()?.observe(viewLifecycleOwner, { videos ->
             if (videos.status == Status.LOADING) {
                 video_fragment_progressbar.visibility = View.VISIBLE
             } else if (videos.status == Status.SUCCESS) {
