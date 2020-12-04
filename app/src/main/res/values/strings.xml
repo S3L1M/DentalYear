@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">Dental Year</string>
-    <string name="get_to_know_your_customers">Get to know Your Customers</string>
-    <string name="day">Day</string>
+    <string name="how_to_celebrate">How To Celebrate</string>
+    <string name="daily_marketing_tip">Daily Marketing Tips</string>
+    <string name="daily_post">Daily Post</string>
+    <string name="how_to_maximize_post">How To Maximize Post</string>
+    <string name="weekly_marketing_exercises">Weekly Marketing Exercises</string>
+    <string name="marketing_trends_news_for_the_day">Marketing Trends &amp; News</string>
+    <string name="this_date_in_history">This Date In History</string>
+    <string name="industry_events">Industry Events</string>
+    <string name="looking_ahead">Looking Ahead</string>
+    <string name="ad_of_the_month">Ad Of The Month</string>
 </resources>

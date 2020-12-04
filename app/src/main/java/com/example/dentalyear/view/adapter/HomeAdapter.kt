@@ -5,23 +5,21 @@ import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.get
-import androidx.dynamicanimation.animation.SpringAnimation
-import androidx.dynamicanimation.animation.SpringForce
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dentalyear.R
-import com.example.dentalyear.data.model.HomeData
+import com.example.dentalyear.data.model.HomeModel
 import net.cachapa.expandablelayout.ExpandableLayout
 
 class HomeAdapter(
     private val context: Context,
-    private val data: List<HomeData>?,
-    private val recyclerView: RecyclerView
+    private var data: HomeModel? = null
 ) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -59,6 +57,7 @@ class HomeAdapter(
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (holder.itemViewType) {
             DEFAULT_SECTION -> bindDefaultSection(holder as MainViewHolder, position)
+            TOP_BAR_SECTION -> bindTopBarSection(holder as TopBarSectionViewHolder)
         }
     }
 
@@ -69,29 +68,101 @@ class HomeAdapter(
         shapeDrawable.color = ContextCompat.getColorStateList(context, itemColor)
         holder.itemContainer.setBackgroundColor(context.resources.getColor(itemBackground))
 
-        if (position <= (data?.size) as Int) {
-            // Set item title
-            holder.titleTextView.text = "${data?.get(position - 1)?.title}"
-            // Set item description (Expanded Text)
-            holder.descriptionTextView.text = "${data?.get(position - 1)?.description}"
+        if (position <= 10) {
+            setItemTitleDescription(holder, position)
             holder.expandableLayout.setInterpolator(OvershootInterpolator())
-            // Check for expansion state | scroll smoothly to clicked item
-            holder.expandableLayout.setOnExpansionUpdateListener { _, state ->
-                run {
-                    if (state == ExpandableLayout.State.EXPANDING)
-                        recyclerView.smoothScrollToPosition(position - 1)
-                }
-            }
         }
 
-        // Handle arrow click (Item click)
-        holder.arrowExpandImageView.setOnClickListener {
+        // Handle item click
+        holder.itemContainer.setOnClickListener {
             if (openedItems[position] != null) {
                 holder.expandableLayout.collapse()
                 openedItems.remove(position)
+                holder.arrowExpandImageView.animation = AnimationUtils.loadAnimation(
+                    context,
+                    R.anim.rotate_clock_wise_1
+                )
             } else {
                 holder.expandableLayout.expand()
                 openedItems[position] = true
+                holder.arrowExpandImageView.animation = AnimationUtils.loadAnimation(
+                    context,
+                    R.anim.rotate_clock_wise
+                )
+            }
+        }
+    }
+
+    private fun setItemTitleDescription(holder: MainViewHolder, position: Int) {
+        when (position) {
+            1 -> {
+                holder.titleTextView.text =
+                    holder.itemView.resources.getString(R.string.how_to_celebrate)
+                holder.descriptionTextView.text = data?.acf?.howToCelebrateDesc
+                holder.promptItemImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.celebrate))
+                holder.expandableItemImage.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.doctor_male))
+            }
+            2 -> {
+                holder.titleTextView.text =
+                    holder.itemView.resources.getString(R.string.daily_marketing_tip)
+                holder.descriptionTextView.text = data?.acf?.dailyMarketingTipDesc
+                holder.promptItemImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.idea_lamp))
+                holder.expandableItemImage.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.tree_of_icons))
+            }
+            3 -> {
+                holder.titleTextView.text = holder.itemView.resources.getString(R.string.daily_post)
+                holder.descriptionTextView.text = data?.acf?.dailyPostsDesc
+                holder.promptItemImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.paomedia_small_flat_post_it))
+                holder.expandableItemImage.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.doctor_male_2))
+            }
+            4 -> {
+                holder.titleTextView.text =
+                    holder.itemView.resources.getString(R.string.how_to_maximize_post)
+                holder.descriptionTextView.text = data?.acf?.howToMaximizePostDesc
+                holder.promptItemImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.rocket))
+                holder.expandableItemImage.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.rocket_with_blue_bg))
+            }
+            5 -> {
+                holder.titleTextView.text =
+                    holder.itemView.resources.getString(R.string.weekly_marketing_exercises)
+                holder.descriptionTextView.text = data?.acf?.weeklyMarketingExercisesDesc
+                holder.promptItemImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.calendar_trans))
+                holder.expandableItemImage.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.doctor_female_2))
+            }
+            6 -> {
+                holder.titleTextView.text =
+                    holder.itemView.resources.getString(R.string.marketing_trends_news_for_the_day)
+                holder.descriptionTextView.text = data?.acf?.marketingTrendsAndNewsForTheDayDesc
+                holder.promptItemImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.stock))
+                holder.expandableItemImage.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.analysis))
+            }
+            7 -> {
+                holder.titleTextView.text =
+                    holder.itemView.resources.getString(R.string.ad_of_the_month)
+                holder.descriptionTextView.text = data?.acf?.adOfTheMonthDesc
+                holder.promptItemImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.play_button))
+                holder.expandableItemImage.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.voice))
+            }
+            8 -> {
+                holder.titleTextView.text =
+                    holder.itemView.resources.getString(R.string.this_date_in_history)
+                holder.descriptionTextView.text = data?.acf?.thisDateInHistoryDesc
+                holder.promptItemImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.list_of_items))
+                holder.expandableItemImage.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.blue_book))
+            }
+            9 -> {
+                holder.titleTextView.text =
+                    holder.itemView.resources.getString(R.string.industry_events)
+                holder.descriptionTextView.text = data?.acf?.industryEventsDesc
+                holder.promptItemImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.time_and_date))
+                holder.expandableItemImage.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.doctor_female))
+            }
+            10 -> {
+                holder.titleTextView.text =
+                    holder.itemView.resources.getString(R.string.looking_ahead)
+                holder.descriptionTextView.text = data?.acf?.lookingAheadDesc
+                holder.promptItemImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.arrow_up))
+                holder.expandableItemImage.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.doctor_female_3))
             }
         }
     }
@@ -113,15 +184,25 @@ class HomeAdapter(
     }
 
     private fun bindTopBarSection(holder: TopBarSectionViewHolder) {
-
+        holder.titleTextView.text = data?.todaysFunHolidayTitle
     }
 
-    override fun getItemCount() = data?.size?.plus(2) ?: 0
+    override fun getItemCount(): Int {
+        return if (data == null)
+            0
+        else
+            12
+    }
+
+    fun setData(data: HomeModel) {
+        this.data = data
+        notifyDataSetChanged()
+    }
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             0 -> TOP_BAR_SECTION
-            data?.size?.inc() -> BOTTOM_BAR_SECTION
+            11 -> BOTTOM_BAR_SECTION
             else -> DEFAULT_SECTION
         }
     }
@@ -136,26 +217,23 @@ class HomeAdapter(
         val descriptionTextView: TextView =
             itemView.findViewById(R.id.home_recycler_view_item_list_description)
 
+        val expandableItemImage: ImageView =
+            itemView.findViewById(R.id.home_recycler_view_item_list_description_image)
+
         val expandableLayout: ExpandableLayout =
             itemView.findViewById(R.id.main_recycler_view_expandable_layout)
 
         val arrowExpandImageView: ImageView =
             itemView.findViewById(R.id.home_recycler_view_item_list_arrow)
 
-        /**
-         * A [SpringAnimation] for this RecyclerView item. This animation is used to bring the item back
-         * after the over-scroll effect.
-         */
-        val translationY: SpringAnimation = SpringAnimation(itemView, SpringAnimation.TRANSLATION_Y)
-            .setSpring(
-                SpringForce()
-                    .setFinalPosition(0f)
-                    .setDampingRatio(SpringForce.DAMPING_RATIO_MEDIUM_BOUNCY)
-                    .setStiffness(SpringForce.STIFFNESS_LOW)
-            )
+        val promptItemImageView: ImageView =
+            itemView.findViewById(R.id.home_recycler_view_item_list_image)
     }
 
-    class TopBarSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
+    class TopBarSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val titleTextView: TextView =
+            itemView.findViewById(R.id.home_recycler_view_top_item_title_2)
+    }
 
     class BottomBarSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

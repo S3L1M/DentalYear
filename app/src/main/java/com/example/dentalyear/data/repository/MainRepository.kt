@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.dentalyear.data.api.DentalApi
 import com.example.dentalyear.data.model.ExhibitModel
+import com.example.dentalyear.data.model.HomeModel
 import com.example.dentalyear.data.model.VideoModel
 import com.example.dentalyear.utils.Resource
 import com.example.dentalyear.utils.Utility
@@ -17,6 +18,7 @@ class MainRepository {
     private var api: DentalApi
     private val videoLiveData = MutableLiveData<Resource<List<VideoModel>>>()
     private val exhibitLiveData = MutableLiveData<Resource<List<ExhibitModel>>>()
+    private val promptLiveData = MutableLiveData<Resource<List<HomeModel>>>()
 
     init {
         val retrofit = Retrofit.Builder()
@@ -79,5 +81,32 @@ class MainRepository {
             }
         })
         return exhibitLiveData
+    }
+
+    // Get prompts list
+    fun getPrompts(filterKey: String): LiveData<Resource<List<HomeModel>>>{
+        promptLiveData.postValue(Resource.loading(null))
+
+        api.getPrompts(filterKey).enqueue(object: Callback<List<HomeModel>>{
+            override fun onResponse(
+                call: Call<List<HomeModel>>,
+                response: Response<List<HomeModel>>
+            ) {
+                // data is successfully loaded | send success signal
+                if (response.body() != null) {
+                    promptLiveData.postValue(Resource.success(response.body()))
+                    return
+                }
+
+                // data is null
+                promptLiveData.postValue(Resource.error(null, "data is null"))
+            }
+
+            override fun onFailure(call: Call<List<HomeModel>>, t: Throwable) {
+                promptLiveData.postValue(Resource.error(null, t.message.toString()))
+            }
+        })
+
+        return promptLiveData
     }
 }
