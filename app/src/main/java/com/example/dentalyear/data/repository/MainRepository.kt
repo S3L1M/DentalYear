@@ -32,11 +32,11 @@ class MainRepository @Inject constructor(
 
     // Get prompts list
     suspend fun getPrompts(filterKey: String) {
-        promptsLiveData.postValue(Resource.loading(null))
 
         val source = homeDao.getPrompts(filterKey)
 
         if (source.isNullOrEmpty()) {
+            promptsLiveData.postValue(Resource.loading(null))
             val data = dentalApi.getPrompts(filterKey)
             if (data.status == Status.SUCCESS) {
                 homeDao.insertPrompts(data.data!!.asDatabaseModel())

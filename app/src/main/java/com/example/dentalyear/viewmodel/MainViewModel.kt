@@ -1,6 +1,5 @@
 package com.example.dentalyear.viewmodel
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -39,20 +38,16 @@ class MainViewModel @ViewModelInject constructor(
     }
 
     fun getPrompts(filterKey: String): LiveData<Resource<List<HomeModel>>>? {
-        Log.d("HomeFragment", "Inside ViewModel")
         if (promptLiveData == null) {
             viewModelScope.launch {
-                Log.d("HomeFragment", "Inside ViewModel2")
                 mainRepository.getPrompts(filterKey)
             }
             promptLiveData = mainRepository.promptsLiveData
         }
-        Log.d("HomeFragment", "Inside ViewModel3")
         return promptLiveData
     }
 
-    fun refreshPrompts(filterKey: String){
-        Log.d("HomeFragment", "Inside ViewModel Refresh")
+    fun refreshPrompts(filterKey: String) {
         viewModelScope.launch {
             mainRepository.getPrompts(filterKey)
         }
