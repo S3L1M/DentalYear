@@ -14,9 +14,11 @@ import com.example.dentalyear.utils.ExhibitItemClickListener
 import com.example.dentalyear.utils.Status
 import com.example.dentalyear.view.adapter.ExhibitAdapter
 import com.example.dentalyear.viewmodel.MainViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_exhibit.*
 
 
+@AndroidEntryPoint
 class ExhibitFragment : Fragment(), ExhibitItemClickListener {
 
     companion object {

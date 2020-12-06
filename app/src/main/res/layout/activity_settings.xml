@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAppBackground"
+    android:fillViewport="false"
+    tools:context=".view.ExhibitDetailsActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/bottom_left_curve_background"
+        android:backgroundTint="@color/colorWhite"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
+
+        <View
+            android:id="@+id/activity_settings_top_app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_bar_height"
+            android:background="@drawable/bottom_left_curve_top_bar"
+            android:backgroundTint="@color/colorSettingsAppBarBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:text="Settings"
+            android:textColor="@color/colorWhite"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@id/activity_settings_top_app_bar"
+            app:layout_constraintEnd_toEndOf="@id/activity_settings_top_app_bar"
+            app:layout_constraintHorizontal_bias="0.19"
+            app:layout_constraintStart_toStartOf="@id/activity_settings_top_app_bar" />
+
+        <ImageView
+            android:id="@+id/activity_settings_back_image_view"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="start"
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/colorWhite" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            android:background="@drawable/settings_item_rounded_corners_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_settings_top_app_bar">
+
+            <TextView
+                android:id="@+id/activity_settings_privacy_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="@string/privacy_text"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp"
+                tools:text="Privacy\n\nYour privacy, and how data about you is managed is very important to us. Please see our full privacy policy on our site at https://dentalyear.com/privacy" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/activity_settings_restore_purchase_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@string/restore_purchase"
+            android:textColor="@color/colorSettingsAppBarBackground"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout4" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            android:background="@drawable/settings_item_rounded_corners_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/activity_settings_restore_purchase_text_view">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:text="Set Country"
+                android:textColor="@color/colorWhite"
+                android:textSize="15sp" />
+
+            <Spinner
+                android:id="@+id/activity_settings_spinner_dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout6"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            android:background="@drawable/settings_item_rounded_corners_background"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout5">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_rounded_corners"
+                android:text="Share it"
+                android:layout_marginBottom="20dp"
+                android:textAllCaps="false"
+                android:textColor="@color/colorSettingsAppBarBackground"
+                app:backgroundTint="@color/colorWhite" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_rounded_corners"
+                android:text="Feedback"
+                android:textAllCaps="false"
+                android:textColor="@color/colorSettingsAppBarBackground"
+                app:backgroundTint="@color/colorWhite" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

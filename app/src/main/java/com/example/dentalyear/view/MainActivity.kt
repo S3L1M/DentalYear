@@ -7,7 +7,9 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.example.dentalyear.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var nav: MeowBottomNavigation
     private lateinit var mHomeTextView: TextView

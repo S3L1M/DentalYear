@@ -39,7 +39,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="32dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/home_fragment_title_logo"
         tools:layout_editor_absoluteX="55dp"
         tools:listitem="@layout/recycler_view_home_list_item" />
 

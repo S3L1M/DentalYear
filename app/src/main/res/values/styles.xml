@@ -5,7 +5,13 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-<!--        <item name="android:statusBarColor">@color/color</item>-->
+        <item name="android:spinnerItemStyle">@style/MyCustomSpinnerStyle</item>
+        <item name="android:spinnerMode">@style/MyCustomSpinnerStyle</item>
+        <item name="android:statusBarColor">@color/colorSettingsAppBarBackground</item>
+    </style>
+
+    <style name="MyCustomSpinnerStyle" parent="@android:style/Widget.Holo.DropDownItem.Spinner">
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
     <style name="MyCustomTabTextAppearance" parent="TextAppearance.Design.Tab">

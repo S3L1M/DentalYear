@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.example.dentalyear.R
 import com.example.dentalyear.data.model.ExhibitModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_exhibit_details.*
 
+@AndroidEntryPoint
 class ExhibitDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

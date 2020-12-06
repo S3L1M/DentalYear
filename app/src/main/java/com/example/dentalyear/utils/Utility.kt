@@ -6,5 +6,8 @@ interface Utility {
         const val UNITED_STATES = "united states"
         const val AUSTRALIA = "australia"
         const val CANADA = "canada"
+        const val UNITED_STATES_KEY = "USA"
+        const val AUSTRALIA_KEY = "AUSTRALIA"
+        const val CANADA_KEY = "CANADA"
     }
 }

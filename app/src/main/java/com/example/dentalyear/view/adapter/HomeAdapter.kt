@@ -15,13 +15,19 @@ import androidx.core.view.get
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dentalyear.R
 import com.example.dentalyear.data.model.HomeModel
+import com.example.dentalyear.utils.HomeTopBarClickListener
+import com.example.dentalyear.utils.Utility
 import net.cachapa.expandablelayout.ExpandableLayout
 
 class HomeAdapter(
     private val context: Context,
+    private val homeTopBarClickListener: HomeTopBarClickListener,
     private var data: HomeModel? = null
-) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var dayDate: String = ""
+    private var monthDayDate: String = ""
+    private var TYPE: String = ""
+
 
     companion object {
         private const val TOP_BAR_SECTION = 0
@@ -185,6 +191,29 @@ class HomeAdapter(
 
     private fun bindTopBarSection(holder: TopBarSectionViewHolder) {
         holder.titleTextView.text = data?.todaysFunHolidayTitle
+        when (TYPE) {
+            Utility.UNITED_STATES_KEY -> {
+                holder.countryImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.usa_logo))
+            }
+            Utility.CANADA_KEY -> {
+                holder.countryImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.analysis))
+            }
+            Utility.AUSTRALIA_KEY -> {
+                holder.countryImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.doctor_female_3))
+            }
+        }
+        holder.datePickerImageView.setOnClickListener {
+            homeTopBarClickListener.datePickerClicked()
+        }
+        holder.rightArrowImageView.setOnClickListener {
+            holder.leftArrowImageView.visibility = View.VISIBLE
+            homeTopBarClickListener.rightArrowClicked(holder.rightArrowImageView)
+        }
+        holder.leftArrowImageView.setOnClickListener {
+            homeTopBarClickListener.leftArrowClicked(holder.leftArrowImageView)
+        }
+        holder.dayDateTextView.text = dayDate
+        holder.monthDayDateTextView.text = monthDayDate
     }
 
     override fun getItemCount(): Int {
@@ -194,8 +223,15 @@ class HomeAdapter(
             12
     }
 
-    fun setData(data: HomeModel) {
+    fun setData(data: HomeModel, TYPE: String) {
         this.data = data
+        this.TYPE = TYPE
+        notifyDataSetChanged()
+    }
+
+    fun setCurrentDate(dayDate: String, monthDayDate: String) {
+        this.dayDate = dayDate
+        this.monthDayDate = monthDayDate
         notifyDataSetChanged()
     }
 
@@ -233,6 +269,24 @@ class HomeAdapter(
     class TopBarSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView =
             itemView.findViewById(R.id.home_recycler_view_top_item_title_2)
+
+        val datePickerImageView: ImageView =
+            itemView.findViewById(R.id.home_recycler_view_top_item_date_picker)
+
+        val rightArrowImageView: ImageView =
+            itemView.findViewById(R.id.home_recycler_view_top_item_arrow_right_icon)
+
+        val leftArrowImageView: ImageView =
+            itemView.findViewById(R.id.home_recycler_view_top_item_arrow_left_icon)
+
+        val dayDateTextView: TextView =
+            itemView.findViewById(R.id.home_recycler_view_top_item_day_date)
+
+        val monthDayDateTextView: TextView =
+            itemView.findViewById(R.id.home_recycler_view_top_item_month_day_num_date)
+
+        val countryImageView: ImageView =
+            itemView.findViewById(R.id.home_recycler_view_top_item_country_logo)
     }
 
     class BottomBarSectionViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)

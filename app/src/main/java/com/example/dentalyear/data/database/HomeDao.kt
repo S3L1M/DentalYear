@@ -9,14 +9,14 @@ import androidx.room.Query
 @Dao
 interface HomeDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertPrompts(home: List<HomeModelCached>)
+    suspend fun insertPrompts(home: List<HomeModelCached>)
 
     @Query("SELECT * FROM home_data_table WHERE promptDate = :date")
     suspend fun getPrompts(date: String): List<HomeModelCached>
 
     @Query("SELECT * FROM home_data_table")
-    fun getPrompts(): LiveData<List<HomeModelCached>>
+    suspend fun getPrompts(): List<HomeModelCached>
 
     @Query("SELECT * FROM home_data_table WHERE id = :id")
-    fun getPrompt(id: Int): LiveData<List<HomeModelCached>>
+    suspend fun getPrompt(id: Int): List<HomeModelCached>
 }

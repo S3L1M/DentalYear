@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorHowToCelebrate">
@@ -28,9 +29,8 @@
             android:text="JULY 16"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/home_recycler_view_top_item_country_logo"
-            app:layout_constraintEnd_toStartOf="@id/home_recycler_view_top_item_arrow_right_icon"
-            app:layout_constraintHorizontal_bias="0.6"
-            app:layout_constraintStart_toEndOf="@id/home_recycler_view_top_item_country_logo"
+            app:layout_constraintEnd_toEndOf="@+id/home_recycler_view_top_item_day_date"
+            app:layout_constraintStart_toStartOf="@+id/home_recycler_view_top_item_day_date"
             app:layout_constraintTop_toBottomOf="@+id/home_recycler_view_top_item_day_date" />
 
 
@@ -42,20 +42,31 @@
             android:text="THURSDAY"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/home_recycler_view_top_item_month_day_num_date"
-            app:layout_constraintEnd_toStartOf="@id/home_recycler_view_top_item_arrow_right_icon"
-            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintEnd_toStartOf="@+id/home_recycler_view_top_item_date_picker"
             app:layout_constraintStart_toEndOf="@id/home_recycler_view_top_item_country_logo"
             app:layout_constraintTop_toTopOf="@id/home_recycler_view_top_item_country_logo" />
 
         <ImageView
             android:id="@+id/home_recycler_view_top_item_arrow_right_icon"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="12dp"
-            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-            app:layout_constraintBottom_toBottomOf="@id/home_recycler_view_top_item_date_picker"
-            app:layout_constraintEnd_toStartOf="@id/home_recycler_view_top_item_date_picker"
-            app:layout_constraintTop_toTopOf="@id/home_recycler_view_top_item_date_picker" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:src="@drawable/ic_baseline_arrow_forward_ios_24"
+            app:layout_constraintBottom_toBottomOf="@id/home_recycler_view_top_item_month_day_num_date"
+            app:layout_constraintStart_toEndOf="@id/home_recycler_view_top_item_month_day_num_date"
+            app:layout_constraintTop_toTopOf="@id/home_recycler_view_top_item_day_date" />
+
+        <ImageView
+            android:id="@+id/home_recycler_view_top_item_arrow_left_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@id/home_recycler_view_top_item_month_day_num_date"
+            app:layout_constraintEnd_toStartOf="@id/home_recycler_view_top_item_month_day_num_date"
+            app:layout_constraintTop_toTopOf="@id/home_recycler_view_top_item_day_date"
+            tools:visibility="visible" />
 
 
         <ImageView

@@ -11,4 +11,14 @@
     <string name="looking_ahead">Looking Ahead</string>
     <string name="ad_of_the_month">Ad Of The Month</string>
     <string name="splash_dental_image">SplashScreenLogoImage</string>
+    <string name="privacy_text">Privacy\n\nYour privacy, and how data about you is managed is very important to us. Please see our full privacy policy on our site at https://dentalyear.com/privacy</string>
+    <string name="restore_purchase">Restore Purchase</string>
+    <string-array name="country_list">
+        <item>USA</item>
+        <item>CANADA</item>
+        <item>AUSTRALIA</item>
+    </string-array>
+    <string name="string_preference_file_key">com.example.dentalyear.country_file</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

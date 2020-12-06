@@ -19,9 +19,11 @@ import com.example.dentalyear.viewmodel.MainViewModel
 import com.google.android.exoplayer2.MediaItem
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_video.*
 
 
+@AndroidEntryPoint
 class VideoFragment : Fragment(), VideoItemClickListener {
 
     private lateinit var adapter: VideoAdapter
