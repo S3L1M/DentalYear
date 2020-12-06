@@ -116,8 +116,6 @@ class HomeFragment : Fragment(), HomeTopBarClickListener {
         home_fragment_dots_image_view.setOnClickListener {
             val intent = Intent(requireActivity(), SettingsActivity::class.java)
             startActivityForResult(intent, 100)
-
-
         }
     }
 
