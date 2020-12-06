@@ -11,7 +11,7 @@
     <string name="looking_ahead">Looking Ahead</string>
     <string name="ad_of_the_month">Ad Of The Month</string>
     <string name="splash_dental_image">SplashScreenLogoImage</string>
-    <string name="privacy_text">Privacy\n\nYour privacy, and how data about you is managed is very important to us. Please see our full privacy policy on our site at https://dentalyear.com/privacy</string>
+    <string name="privacy_text">Your privacy, and how data about you is managed is very important to us. Please see our full privacy policy on our site at https://dentalyear.com/privacy</string>
     <string name="restore_purchase">Restore Purchase</string>
     <string-array name="country_list">
         <item>USA</item>
