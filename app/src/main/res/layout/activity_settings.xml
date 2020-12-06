@@ -31,13 +31,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:layout_marginBottom="8dp"
+            android:padding="24dp"
             android:text="Settings"
+            android:fontFamily="@font/roboto_medium_numbers"
             android:textColor="@color/colorWhite"
-            android:textSize="30sp"
+            android:textSize="32sp"
             app:layout_constraintBottom_toBottomOf="@id/activity_settings_top_app_bar"
             app:layout_constraintEnd_toEndOf="@id/activity_settings_top_app_bar"
-            app:layout_constraintHorizontal_bias="0.19"
+            app:layout_constraintHorizontal_bias="0.196"
             app:layout_constraintStart_toStartOf="@id/activity_settings_top_app_bar" />
 
         <ImageView
@@ -45,8 +47,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="start"
-            android:layout_margin="4dp"
-            android:padding="4dp"
+            android:layout_margin="8dp"
+            android:padding="8dp"
             android:src="@drawable/ic_baseline_arrow_back_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -54,24 +56,40 @@
 
         <LinearLayout
             android:id="@+id/linearLayout4"
-            android:layout_width="250dp"
+            android:layout_width="372dp"
             android:layout_height="wrap_content"
             android:layout_margin="50dp"
+            android:orientation="vertical"
             android:background="@drawable/settings_item_rounded_corners_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/activity_settings_top_app_bar">
 
             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PRIVACY"
+                android:layout_gravity="center"
+                android:padding="20dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorWhite"
+                android:textSize="20sp"
+                tools:text="PRIVACY" />
+            <TextView
                 android:id="@+id/activity_settings_privacy_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
+                android:paddingTop="8dp"
+                android:paddingBottom="36dp"
                 android:text="@string/privacy_text"
                 android:textAlignment="center"
+                android:layout_marginHorizontal="56dp"
+                android:layout_marginBottom="20dp"
                 android:textColor="@color/colorWhite"
-                android:textSize="15sp"
-                tools:text="Privacy\n\nYour privacy, and how data about you is managed is very important to us. Please see our full privacy policy on our site at https://dentalyear.com/privacy" />
+                android:textSize="20sp"
+                android:lineSpacingExtra="12dp"
+                android:justificationMode="inter_word"
+                tools:text="Your privacy, and how data about you is managed is very important to us. Please see our full privacy policy on our site at https://dentalyear.com/privacy" />
         </LinearLayout>
 
 
@@ -79,7 +97,7 @@
             android:id="@+id/activity_settings_restore_purchase_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="48dp"
             android:text="@string/restore_purchase"
             android:textColor="@color/colorSettingsAppBarBackground"
             android:textSize="18sp"
@@ -90,13 +108,13 @@
 
         <LinearLayout
             android:id="@+id/linearLayout5"
-            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_margin="50dp"
+            android:layout_margin="34dp"
+            android:layout_width="372dp"
             android:background="@drawable/settings_item_rounded_corners_background"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="15dp"
+            android:padding="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/activity_settings_restore_purchase_text_view">
@@ -104,10 +122,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
+                android:padding="16dp"
+
                 android:text="Set Country"
                 android:textColor="@color/colorWhite"
-                android:textSize="15sp" />
+                android:fontFamily="@font/roboto_medium_numbers"
+                android:textSize="16sp" />
 
             <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
                 android:id="@+id/activity_settings_spinner_country"
@@ -116,7 +136,9 @@
                 android:layout_marginHorizontal="20dp"
                 android:background="@drawable/button_rounded_corners"
                 android:backgroundTint="@color/colorWhite"
-                android:paddingHorizontal="5dp"
+                android:paddingHorizontal="8dp"
+                android:paddingTop="8dp"
+                android:layout_marginBottom="36dp"
                 app:smsp_arrowColor="#757575"
                 app:smsp_arrowPaddingTop="5dp"
                 app:smsp_enableErrorLabel="false"
@@ -136,23 +158,33 @@
 
         <LinearLayout
             android:id="@+id/linearLayout6"
-            android:layout_width="250dp"
+            android:layout_width="372dp"
             android:layout_height="wrap_content"
             android:layout_margin="50dp"
             android:background="@drawable/settings_item_rounded_corners_background"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="30dp"
+            android:padding="36dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/linearLayout5">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Love Dental Year?"
+                android:fontFamily="@font/roboto_medium_numbers"
+                android:padding="12dp"
+                android:layout_marginBottom="20dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp"/>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="24dp"
                 android:background="@drawable/button_rounded_corners"
-                android:text="Share it"
+                android:text="Share it!"
                 android:textAllCaps="false"
                 android:textColor="@color/colorSettingsAppBarBackground"
                 app:backgroundTint="@color/colorWhite" />
