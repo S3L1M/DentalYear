@@ -10,6 +10,7 @@
         android:id="@+id/home_fragmnet_dental_logo"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/dental_logo"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +27,8 @@
 
     <ImageView
         android:id="@+id/home_fragment_dots_image_view"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:src="@drawable/ic_baseline_more_vert_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/home_fragmnet_dental_logo"
@@ -40,7 +41,6 @@
         android:layout_marginTop="32dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/home_fragment_title_logo"
-        tools:layout_editor_absoluteX="55dp"
         tools:listitem="@layout/recycler_view_home_list_item" />
 
     <ProgressBar

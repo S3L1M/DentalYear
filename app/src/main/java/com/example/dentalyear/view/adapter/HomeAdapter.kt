@@ -192,13 +192,13 @@ class HomeAdapter(
     private fun bindTopBarSection(holder: TopBarSectionViewHolder) {
         holder.titleTextView.text = data?.todaysFunHolidayTitle
         when (TYPE) {
-            Utility.UNITED_STATES_KEY -> {
+            Utility.UNITED_STATES -> {
                 holder.countryImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.usa_logo))
             }
-            Utility.CANADA_KEY -> {
+            Utility.CANADA -> {
                 holder.countryImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.analysis))
             }
-            Utility.AUSTRALIA_KEY -> {
+            Utility.AUSTRALIA -> {
                 holder.countryImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.doctor_female_3))
             }
         }

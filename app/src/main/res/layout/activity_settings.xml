@@ -12,7 +12,6 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:background="@drawable/bottom_left_curve_background"
         android:backgroundTint="@color/colorWhite"
         android:gravity="center_horizontal"
@@ -97,6 +96,7 @@
             android:background="@drawable/settings_item_rounded_corners_background"
             android:gravity="center"
             android:orientation="vertical"
+            android:padding="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/activity_settings_restore_purchase_text_view">
@@ -109,11 +109,28 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="15sp" />
 
-            <Spinner
-                android:id="@+id/activity_settings_spinner_dropdown"
+            <com.chivorn.smartmaterialspinner.SmartMaterialSpinner
+                android:id="@+id/activity_settings_spinner_country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:spinnerMode="dropdown" />
+                android:layout_marginHorizontal="20dp"
+                android:background="@drawable/button_rounded_corners"
+                android:backgroundTint="@color/colorWhite"
+                android:paddingHorizontal="5dp"
+                app:smsp_arrowColor="#757575"
+                app:smsp_arrowPaddingTop="5dp"
+                app:smsp_enableErrorLabel="false"
+                app:smsp_enableFloatingLabel="false"
+                app:smsp_floatingLabelColor="@color/colorNavUnSelected"
+                app:smsp_hint="Select your country"
+                app:smsp_hintColor="@color/colorNavUnSelected"
+                app:smsp_itemColor="@color/colorExhibitBackground"
+                app:smsp_itemListColor="@android:color/darker_gray"
+                app:smsp_itemListHintBackgroundColor="@color/colorWhite"
+                app:smsp_itemListHintColor="@color/colorNavUnSelected"
+                app:smsp_multilineError="false"
+                app:smsp_selectedItemListColor="@color/colorExhibitBackground"
+                app:smsp_underlineColor="@color/colorWhite" />
         </LinearLayout>
 
 
@@ -133,9 +150,9 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/button_rounded_corners"
                 android:text="Share it"
-                android:layout_marginBottom="20dp"
                 android:textAllCaps="false"
                 android:textColor="@color/colorSettingsAppBarBackground"
                 app:backgroundTint="@color/colorWhite" />
@@ -149,7 +166,6 @@
                 android:textColor="@color/colorSettingsAppBarBackground"
                 app:backgroundTint="@color/colorWhite" />
         </LinearLayout>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +28,12 @@ import java.util.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), HomeTopBarClickListener {
+
+    companion object {
+        const val COUNTRY_KEY = "country_key"
+        const val SELECTED_COUNTRY_RESULT = "country_result"
+        const val REQUEST_CODE = 1
+    }
 
     private lateinit var adapter: HomeAdapter
     private lateinit var viewModel: MainViewModel
@@ -67,7 +72,7 @@ class HomeFragment : Fragment(), HomeTopBarClickListener {
             getString(R.string.string_preference_file_key),
             Context.MODE_PRIVATE
         )
-        currentCountry = prefs.getString("KEY", Utility.UNITED_STATES_KEY).toString()
+        currentCountry = prefs.getString(COUNTRY_KEY, Utility.UNITED_STATES).toString()
 
         // init datePicker
         initDatePicker()
@@ -82,10 +87,8 @@ class HomeFragment : Fragment(), HomeTopBarClickListener {
                     Status.LOADING -> {
                         home_fragment_progress_bar.visibility = View.VISIBLE
                         changeViewVisibility(View.INVISIBLE)
-                        Log.d("HomeFragment", "Loading")
                     }
                     Status.SUCCESS -> {
-                        Log.d("HomeFragment", "Success")
                         prepareData(prompts.data!!)
                         // change visibility to visible
                         home_fragment_progress_bar.visibility = View.INVISIBLE
@@ -96,7 +99,6 @@ class HomeFragment : Fragment(), HomeTopBarClickListener {
                         setAdapterData()
                     }
                     Status.ERROR -> {
-                        Log.d("HomeFragment", "Error: ${prompts.message}")
                         home_fragment_progress_bar.visibility = View.INVISIBLE
                     }
                 }
@@ -109,13 +111,12 @@ class HomeFragment : Fragment(), HomeTopBarClickListener {
             viewModel.refreshPrompts(formatDate(Date(it)))
         }
         datePicker.addOnNegativeButtonClickListener {
-            Log.d("HomeFragment", "Negative Called")
         }
 
         // Listen for dots image view (settings)
         home_fragment_dots_image_view.setOnClickListener {
             val intent = Intent(requireActivity(), SettingsActivity::class.java)
-            startActivityForResult(intent, 100)
+            startActivityForResult(intent, REQUEST_CODE)
         }
     }
 
@@ -149,15 +150,15 @@ class HomeFragment : Fragment(), HomeTopBarClickListener {
     }
 
     private fun setAdapterData() {
-        when (currentCountry) {
-            Utility.UNITED_STATES_KEY -> {
-                adapter.setData(usaPrompt!!, Utility.UNITED_STATES_KEY)
+        when (currentCountry.toLowerCase(Locale.ROOT)) {
+            Utility.UNITED_STATES -> {
+                adapter.setData(usaPrompt!!, Utility.UNITED_STATES)
             }
-            Utility.CANADA_KEY -> {
-                adapter.setData(canadaPrompt!!, Utility.CANADA_KEY)
+            Utility.CANADA -> {
+                adapter.setData(canadaPrompt!!, Utility.CANADA)
             }
-            Utility.AUSTRALIA_KEY -> {
-                adapter.setData(australiaPrompt!!, Utility.AUSTRALIA_KEY)
+            Utility.AUSTRALIA -> {
+                adapter.setData(australiaPrompt!!, Utility.AUSTRALIA)
             }
         }
     }
@@ -270,13 +271,9 @@ class HomeFragment : Fragment(), HomeTopBarClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.d("HomeFragment", "HERE 1")
-        if (requestCode == 100) {
-            Log.d("HomeFragment", "HERE 2")
+        if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK && data != null) {
-                Log.d("HomeFragment", "HERE 3")
-                currentCountry = data.getStringExtra("DATA").toString()
-                Log.d("HomeFragment", "Country: $currentCountry")
+                currentCountry = data.getStringExtra(SELECTED_COUNTRY_RESULT).toString()
                 setAdapterData()
             }
         }

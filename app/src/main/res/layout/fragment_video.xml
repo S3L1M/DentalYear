@@ -104,13 +104,12 @@
                 android:id="@+id/video_fragment_play_button_image_view"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:src="@drawable/play_button"
+                android:src="@drawable/video_play_button"
                 app:layout_constraintBottom_toBottomOf="@id/video_fragment_video_thumbnail"
                 app:layout_constraintEnd_toEndOf="@+id/video_fragment_video_thumbnail"
                 app:layout_constraintStart_toStartOf="@id/video_fragment_video_thumbnail"
                 app:layout_constraintTop_toBottomOf="@id/video_fragment_video_thumbnail"
-                app:layout_constraintTop_toTopOf="@id/video_fragment_video_thumbnail"
-                app:tint="@color/colorBlack" />
+                app:layout_constraintTop_toTopOf="@id/video_fragment_video_thumbnail" />
 
             <TextView
                 android:id="@+id/video_fragment_video_title"

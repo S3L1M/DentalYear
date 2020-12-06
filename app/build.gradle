@@ -111,5 +111,7 @@ dependencies {
     implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha01'
     kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha01'
 
+    // SmartSpinner
+    implementation 'com.github.chivorns.androidx:smartmaterialspinner:1.2.1'
 
 }
