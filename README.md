@@ -3,7 +3,7 @@
 ## Screenshots
 | Home | Notes | Exhibits | Video | Settings |
 |------|-------|----------|-------|----------|
-|![](/screenshots/home.png)| |![](/screenshots/exhibit.png)| ![](/screenshots/video.png) | ![]/screenshot/settings.png |
+|![](/screenshots/home.png)| |![](/screenshots/exhibit.png)| ![](/screenshots/video.png) | ![](/screenshot/settings.png) |
 || |![](/screenshots/exhibit_details.png)| ![](/screenshots/video2.png) | |
 || | | ![](/screenshots/video3.png) | |
 
