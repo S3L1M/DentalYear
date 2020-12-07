@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".view.HomeFragment">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginTop="2dp"
+        android:background="@color/colorNavUnSelected"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/home_fragmnet_dental_logo" />
+
     <ImageView
         android:id="@+id/home_fragmnet_dental_logo"
         android:layout_width="40dp"

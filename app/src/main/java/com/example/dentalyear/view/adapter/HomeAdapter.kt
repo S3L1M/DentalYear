@@ -196,10 +196,10 @@ class HomeAdapter(
                 holder.countryImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.usa_logo))
             }
             Utility.CANADA -> {
-                holder.countryImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.analysis))
+                holder.countryImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.canada))
             }
             Utility.AUSTRALIA -> {
-                holder.countryImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.doctor_female_3))
+                holder.countryImageView.setImageDrawable(holder.itemView.resources.getDrawable(R.drawable.australia))
             }
         }
         holder.datePickerImageView.setOnClickListener {
