@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        android:clipToPadding="true"
+        app:cardUseCompatPadding="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="24dp"
+                android:backgroundTint="@color/colorWhite"
+                android:background="@drawable/settings_item_rounded_corners_background">
+
+                <TextView
+                    android:id="@+id/notesTitleListView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Notes here"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/editNoteImageView"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_alignParentEnd="true"
+                    android:contentDescription="EditNoteButton"
+                    android:src="@drawable/note_thumbtack" />
+
+                <TextView
+                    android:id="@+id/dateOfNote"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:layout_below="@id/notesTitleListView"
+                    android:text="Note's date here"
+                    android:textColor="@color/exo_gray"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
