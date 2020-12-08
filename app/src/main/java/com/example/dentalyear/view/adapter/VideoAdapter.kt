@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -34,6 +35,10 @@ class VideoAdapter(
             holder.itemView.setOnClickListener {
                 itemClicked.onVideoItemClicked(position, video)
             }
+
+            holder.videoDownloadImageButton.setOnClickListener {
+                itemClicked.onVideoDownloadItemClicked(position, video)
+            }
         }
     }
 
@@ -53,5 +58,8 @@ class VideoAdapter(
 
         val videoThumbnail: ImageView =
             itemView.findViewById(R.id.video_recycler_view_thumbnail_image_view)
+
+        val videoDownloadImageButton: ImageButton =
+            itemView.findViewById(R.id.video_recycler_view_save_image_button)
     }
 }

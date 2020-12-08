@@ -49,6 +49,7 @@ android {
     androidExtensions {
         experimental = true
     }
+
 }
 
 dependencies {
@@ -114,6 +115,10 @@ dependencies {
     // SmartSpinner
     implementation 'com.github.chivorns.androidx:smartmaterialspinner:1.2.1'
 
+    // video downloader
+    implementation 'com.koushikdutta.ion:ion:3.0.8'
 
+    // Notification
+    implementation "com.android.support:support-compat:28.0.0"
 
 }

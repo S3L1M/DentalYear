@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_download_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.DownloadActivity">
+
+
+    <View
+        android:id="@+id/activity_download_top_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@drawable/bottom_left_curve_top_bar"
+        android:backgroundTint="@color/colorAppBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Downloads"
+        android:textColor="@color/colorWhite"
+        android:textSize="32sp"
+        app:layout_constraintBottom_toBottomOf="@id/activity_download_top_app_bar"
+        app:layout_constraintEnd_toEndOf="@id/activity_download_top_app_bar"
+        app:layout_constraintHorizontal_bias="0.196"
+        app:layout_constraintStart_toStartOf="@id/activity_download_top_app_bar" />
+
+    <ImageView
+        android:id="@+id/activity_download_back_image_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="start"
+        android:layout_margin="8dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/colorWhite" />
+
+    <include
+        android:id="@+id/activity_download_downloading_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        layout="@layout/recycler_view_downloading_list_item"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_download_top_app_bar"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activity_download_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        tools:listitem="@layout/recycler_view_downloaded_list_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_download_downloading_item" />
+
+    <include
+        android:id="@+id/activity_download_downloaded_item"
+        layout="@layout/recycler_view_downloading_list_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_download_top_app_bar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

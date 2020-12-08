@@ -4,12 +4,14 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.dentalyear.data.database.VideoModelCached
 import com.example.dentalyear.data.model.ExhibitModel
 import com.example.dentalyear.data.model.HomeModel
 import com.example.dentalyear.data.model.VideoModel
 import com.example.dentalyear.data.repository.MainRepository
 import com.example.dentalyear.utils.Resource
 import kotlinx.coroutines.launch
+
 
 class MainViewModel @ViewModelInject constructor(
     private val mainRepository: MainRepository
@@ -22,10 +24,24 @@ class MainViewModel @ViewModelInject constructor(
     fun getVideos(): LiveData<Resource<List<VideoModel>>>? {
         if (videoLiveData == null) {
             viewModelScope.launch {
-                videoLiveData = mainRepository.getVideos()
+                mainRepository.getVideos()
             }
+            videoLiveData = mainRepository.categoryWithVideosLiveData
         }
         return videoLiveData
+    }
+
+    fun updateVideo(video: VideoModelCached){
+        viewModelScope.launch {
+            mainRepository.updateVideo(video)
+//            mainRepository.getVideos()
+        }
+    }
+
+    fun refreshVideos(){
+        viewModelScope.launch {
+            mainRepository.getVideos()
+        }
     }
 
     fun getExhibits(): LiveData<Resource<List<ExhibitModel>>>? {

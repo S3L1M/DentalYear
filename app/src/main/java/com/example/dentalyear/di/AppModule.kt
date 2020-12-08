@@ -45,8 +45,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRepository(dentalApi: DentalApi, homeDao: HomeDao) =
-        MainRepository(dentalApi, homeDao)
+    fun provideRepository(dentalApi: DentalApi, database: ApplicationDatabase) =
+        MainRepository(dentalApi, database)
 
 
 }

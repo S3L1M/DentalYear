@@ -39,39 +39,3 @@ data class HomeModelCached(
         )
     }
 }
-
-
-fun List<HomeModel>.asDatabaseModel(): List<HomeModelCached> {
-    return map {
-        HomeModelCached(
-            it.id,
-            it.link,
-            it.promptCountry,
-            it.promptDate,
-            it.todaysFunHolidayTitle,
-            it.acf.howToCelebrateDesc,
-            it.acf.dailyMarketingTipDesc,
-            it.acf.dailyPostsDesc,
-            it.acf.howToMaximizePostDesc,
-            it.acf.weeklyMarketingExercisesDesc,
-            it.acf.marketingTrendsAndNewsForTheDayDesc,
-            it.acf.adOfTheMonthDesc,
-            it.acf.thisDateInHistoryDesc,
-            it.acf.industryEventsDesc,
-            it.acf.lookingAheadDesc
-        )
-    }
-}
-
-fun List<HomeModelCached>.asDataModel(): List<HomeModel> {
-    return map {
-        HomeModel(
-            it.id,
-            it.link,
-            it.promptCountry,
-            it.promptDate,
-            it.todaysFunHolidayTitle,
-            it.getAcf(),
-        )
-    }
-}

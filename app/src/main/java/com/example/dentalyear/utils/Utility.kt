@@ -7,5 +7,8 @@ interface Utility {
         const val UNITED_STATES = "united states"
         const val AUSTRALIA = "australia"
         const val CANADA = "canada"
+        const val NOT_DOWNLOADED = 0
+        const val DOWNLOADING = 1
+        const val DOWNLOADED = 2
     }
 }

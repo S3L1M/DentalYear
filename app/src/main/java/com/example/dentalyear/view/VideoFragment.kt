@@ -1,5 +1,6 @@
 package com.example.dentalyear.view
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.dentalyear.R
@@ -25,6 +26,11 @@ import kotlinx.android.synthetic.main.fragment_video.*
 
 @AndroidEntryPoint
 class VideoFragment : Fragment(), VideoItemClickListener {
+
+    companion object {
+        const val VIDEO_POSITION = "video_position"
+        const val VIDEO_DATA = "video_data"
+    }
 
     private lateinit var adapter: VideoAdapter
     private lateinit var video: VideoModel
@@ -45,7 +51,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         // Define ViewModel
-        val viewModel: MainViewModel by activityViewModels()
+        val viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         /**
          * Init Visibility of the views
@@ -58,15 +64,24 @@ class VideoFragment : Fragment(), VideoItemClickListener {
 
         // Get Videos
         viewModel.getVideos()?.observe(viewLifecycleOwner, { videos ->
-            if (videos.status == Status.LOADING) {
-                video_fragment_progressbar.visibility = View.VISIBLE
-            } else if (videos.status == Status.SUCCESS) {
-                video_fragment_progressbar.visibility = View.INVISIBLE
-                changeViewVisibility(View.VISIBLE)
-                // Prepare data
-                prepareData(videos.data!!)
-                // Set the default data to funVibes
-                setAdapterData(funVibesList)
+            Log.d("DownloadActivity", "HERE 1")
+            when (videos.status) {
+                Status.LOADING -> {
+                    Log.d("DownloadActivity", "HERE 2")
+                    video_fragment_progressbar.visibility = View.VISIBLE
+                }
+                Status.SUCCESS -> {
+                    Log.d("DownloadActivity", "HERE 3")
+                    video_fragment_progressbar.visibility = View.INVISIBLE
+                    changeViewVisibility(View.VISIBLE)
+                    // Prepare data
+                    prepareData(videos.data!!)
+                    // Set the default data to funVibes
+                    setAdapterData(funVibesList)
+                }
+                Status.ERROR -> {
+                    Log.d("DownloadActivity", "HERE 4")
+                }
             }
         })
 
@@ -100,6 +115,11 @@ class VideoFragment : Fragment(), VideoItemClickListener {
             override fun onTabReselected(tab: TabLayout.Tab?) {
             }
         })
+
+        // open saved videos
+        video_fragment_save_image_button.setOnClickListener {
+            openDownloadVideoActivity()
+        }
     }
 
 
@@ -124,7 +144,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
      */
     private fun prepareData(videos: List<VideoModel>) {
         for (video in videos) {
-            for (category in video.acf.videoCategory) {
+            for (category in video.acf.videoCategories) {
                 when (category.id) {
                     // Fun Vibes Id
                     5524 -> funVibesList.add(video)
@@ -155,6 +175,20 @@ class VideoFragment : Fragment(), VideoItemClickListener {
     }
 
 
+    private fun openDownloadVideoActivity(
+        position: Int = 0,
+        data: VideoModel? = null
+    ) {
+        val intent = Intent(requireContext(), DownloadActivity::class.java)
+        Log.d("VideoFragment", "HERE 1")
+        if (data != null) {
+            Log.d("VideoFragment", "HERE 2")
+            intent.putExtra(VIDEO_POSITION, position)
+            intent.putExtra(VIDEO_DATA, data)
+        }
+        startActivity(intent)
+    }
+
     override fun onVideoItemClicked(position: Int, data: VideoModel) {
         Log.d("VideoFragment", "Position: $position")
         // release player if the user click on onther video
@@ -162,6 +196,13 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         // TODO : Remove position
 //        this.position = position
         setVideoData(data)
+    }
+
+    override fun onVideoDownloadItemClicked(
+        position: Int,
+        data: VideoModel
+    ) {
+        openDownloadVideoActivity(position, data)
     }
 
     private fun setAdapterData(videos: List<VideoModel>) {
