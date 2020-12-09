@@ -7,8 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dentalyear.R
 import com.example.dentalyear.data.model.VideoModel
+import com.example.dentalyear.utils.DownloadedVideoItemClickListener
+import com.example.dentalyear.utils.VideoItemClickListener
 
 class DownloadAdapter(
+    private val itemClicked: DownloadedVideoItemClickListener,
     private var data: MutableList<VideoModel> = mutableListOf()
 ) : RecyclerView.Adapter<DownloadAdapter.DownloadViewHolder>() {
 
@@ -23,6 +26,7 @@ class DownloadAdapter(
         val video = data[position]
         holder.videoTitle.text = video.videoTitle
         holder.videoDuration.text = "Duration: ${video.videoDuration}"
+        holder.itemView.setOnClickListener{itemClicked.onDownloadedVideoClicked(video)}
 
 //        if (currentDownloadingStatus == Utility.DOWNLOADING && position == 0) {
 //            holder.downloadingProgressBar.visibility = View.VISIBLE

@@ -30,6 +30,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
     companion object {
         const val VIDEO_POSITION = "video_position"
         const val VIDEO_DATA = "video_data"
+        const val VIDEO_MODEL = "video_model"
     }
 
     private lateinit var adapter: VideoAdapter
@@ -189,7 +190,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         startActivity(intent)
     }
 
-    override fun onVideoItemClicked(data: VideoModel) {
+    override fun onVideoItemClicked(data: VideoModel) {  //TODO Reuse this function
         // release player if the user click on another video
         releasePlayer()
         setVideoData(data)
