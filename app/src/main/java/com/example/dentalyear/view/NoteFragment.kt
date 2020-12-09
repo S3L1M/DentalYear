@@ -6,8 +6,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dentalyear.R
 import com.example.dentalyear.data.database.NoteModel
 import com.example.dentalyear.utils.NoteItemClickListener
@@ -18,8 +21,8 @@ import com.example.dentalyear.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_note.*
 import kotlinx.android.synthetic.main.fragment_video.*
-import java.text.SimpleDateFormat
 import java.util.*
+
 
 class NoteFragment : Fragment(), NoteItemClickListener {
 
@@ -31,6 +34,7 @@ class NoteFragment : Fragment(), NoteItemClickListener {
     private lateinit var adapter: NoteAdapter
     private var noteList = mutableListOf<NoteModel>()
     private var goalList = mutableListOf<NoteModel>()
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +48,7 @@ class NoteFragment : Fragment(), NoteItemClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         // Define viewModel
-        val viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         // init recyclerView
         initRecyclerView()
@@ -73,6 +77,36 @@ class NoteFragment : Fragment(), NoteItemClickListener {
                 setAdapterData(goalList)
             }
         })
+
+        val simpleItemTouchCallback: ItemTouchHelper.SimpleCallback = object :
+            ItemTouchHelper.SimpleCallback(
+                0,
+                ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT
+            ) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, swipeDir: Int) {
+                //Remove swiped item from list and notify the RecyclerView
+                val position = viewHolder.adapterPosition
+                when (getNoteType()) {
+                    Utility.NOTE_NOTES -> removeNote(noteList[position])
+                    Utility.NOTE_GOALS -> removeNote(goalList[position])
+                }
+                adapter.removeNote(position)
+                Toast.makeText(requireContext(), "Note removed Successfully", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
+
+        // Assign swipe listener for recycler view
+        val itemTouchHelper = ItemTouchHelper(simpleItemTouchCallback)
+        itemTouchHelper.attachToRecyclerView(fragment_note_recycler_view)
 
         // Listen for Tab layout
         fragment_note_tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -127,7 +161,7 @@ class NoteFragment : Fragment(), NoteItemClickListener {
     }
 
     private fun setAdapterData(notes: List<NoteModel>) {
-        adapter.setData(notes)
+        adapter.setData(notes as MutableList<NoteModel>)
     }
 
     private fun openAddNoteActivity(
@@ -141,7 +175,11 @@ class NoteFragment : Fragment(), NoteItemClickListener {
         this.startActivity(intent)
     }
 
-    private fun getNoteType(): Int{
+    private fun removeNote(note: NoteModel) {
+        viewModel.deleteNote(note)
+    }
+
+    private fun getNoteType(): Int {
         return if (fragment_note_tabLayout.selectedTabPosition == Utility.NOTE_NOTES)
             Utility.NOTE_NOTES
         else

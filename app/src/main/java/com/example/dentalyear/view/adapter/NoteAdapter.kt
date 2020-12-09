@@ -12,7 +12,7 @@ import com.example.dentalyear.utils.NoteItemClickListener
 
 class NoteAdapter(
     private val itemClick: NoteItemClickListener,
-    private var data: List<NoteModel>? = null
+    private var data: MutableList<NoteModel>? = null
 ) :
     RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
@@ -33,9 +33,14 @@ class NoteAdapter(
 
     override fun getItemCount() = data?.size ?: 0
 
-    fun setData(data: List<NoteModel>) {
+    fun setData(data: MutableList<NoteModel>) {
         this.data = data
         notifyDataSetChanged()
+    }
+
+    fun removeNote(position: Int){
+        data?.removeAt(position)
+        notifyItemRemoved(position)
     }
 
     class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
