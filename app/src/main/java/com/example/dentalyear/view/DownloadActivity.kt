@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dentalyear.R
@@ -108,8 +109,9 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
             .progress { downloaded, total ->
                 run {
                     runOnUiThread {
+                        findViewById<TextView>(R.id.downloading_recycler_view_video_dash).visibility = TextView.VISIBLE
                         downloading_recycler_view_video_current_size.text = (downloaded/1048576).toString()
-                        downloading_recycler_view_total_downloaded_size.text = (total/1048576).toString()
+                        downloading_recycler_view_total_downloaded_size.text = (total/1048576).toString() + " MB"
                         downloading_recycler_view_video_progress_bar.progress =
                             (100.0 * downloaded / total).toInt()
                     }
