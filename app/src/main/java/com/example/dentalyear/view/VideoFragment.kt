@@ -214,7 +214,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
 
     private fun chooseVideo(video: VideoModel, position: Int){
         video_fragment_tabLayout.getTabAt(position)?.select()
-        onVideoItemClicked(0, video)
+        onVideoItemClicked(video)
     }
 
     override fun onVideoItemClicked(data: VideoModel) {
