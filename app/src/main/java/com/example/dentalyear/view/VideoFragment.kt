@@ -217,12 +217,9 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         onVideoItemClicked(0, video)
     }
 
-    override fun onVideoItemClicked(position: Int, data: VideoModel) {
-        Log.d("VideoFragment", "Position: $position")
-        // release player if the user click on onther video
+    override fun onVideoItemClicked(data: VideoModel) {
+        // release player if the user click on another video
         releasePlayer()
-        // TODO : Remove position
-//        this.position = position
         setVideoData(data)
     }
 

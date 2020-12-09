@@ -14,6 +14,7 @@ import com.example.dentalyear.utils.Status
 import com.example.dentalyear.utils.Utility
 import com.example.dentalyear.utils.asVideoDatabaseModel
 import com.example.dentalyear.view.adapter.DownloadAdapter
+import com.example.dentalyear.view.adapter.VideoAdapter
 import com.example.dentalyear.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.koushikdutta.ion.Ion
@@ -170,4 +171,10 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
             ""
         }
     }
+
+    override fun onDownloadedVideoClicked(holder: VideoAdapter.VideoViewHolder, data: VideoModel) {
+        TODO("Not yet implemented")
+    }
+
+    fun back(v: View) = finish()
 }

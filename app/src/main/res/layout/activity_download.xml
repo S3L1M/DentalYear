@@ -40,7 +40,8 @@
         android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/colorWhite" />
+        app:tint="@color/colorWhite"
+        android:onClick="back"/>
 
     <include
         android:id="@+id/activity_download_downloading_item"

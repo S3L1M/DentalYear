@@ -33,7 +33,7 @@ class VideoAdapter(
             Glide.with(context).load(video.acf.thumbImage).into(holder.videoThumbnail)
 
             holder.itemView.setOnClickListener {
-                itemClicked.onVideoItemClicked(position, video)
+                itemClicked.onVideoItemClicked(video)
             }
 
             holder.videoDownloadImageButton.setOnClickListener {
