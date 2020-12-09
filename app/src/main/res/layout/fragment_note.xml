@@ -48,6 +48,27 @@
             android:text="Goals" />
     </com.google.android.material.tabs.TabLayout>
 
+    <ImageView
+        android:id="@+id/fragment_note_logo"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/dental_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_note_top_app_bar" />
+
+    <TextView
+        android:id="@+id/fragment_note_logo_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Your notes will appear here"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fragment_note_logo" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/fragment_note_recycler_view"

@@ -2,7 +2,6 @@ package com.example.dentalyear.view
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +19,6 @@ import com.example.dentalyear.view.adapter.NoteAdapter
 import com.example.dentalyear.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_note.*
-import kotlinx.android.synthetic.main.fragment_video.*
 import java.util.*
 
 
@@ -61,20 +59,19 @@ class NoteFragment : Fragment(), NoteItemClickListener {
          */
         // Listen for notes
         viewModel.getAllNotes()?.observe(viewLifecycleOwner, { notes ->
-            Log.d("NoteFragment", "Inside getAllNotes() 1")
-            if (notes.isNullOrEmpty())
-                return@observe
-
-            Log.d("NoteFragment", "Inside getAllNotes() 2")
-            // Prepare notes | get Notes and Goals
-            prepareNotes(notes)
-
-            if (fragment_note_tabLayout.selectedTabPosition == 0) {
-                Log.d("NoteFragment", "Inside getAllNotes() 6")
-                setAdapterData(noteList)
+            if (notes.isNullOrEmpty()) {
+                changeVisibility(View.VISIBLE)
+                getStartingText()
             } else {
-                Log.d("NoteFragment", "Inside getAllNotes() 7")
-                setAdapterData(goalList)
+
+                // Prepare notes | get Notes and Goals
+                prepareNotes(notes)
+                changeVisibility(View.INVISIBLE)
+                fragment_note_recycler_view.visibility = View.VISIBLE
+                when (getNoteType()) {
+                    Utility.NOTE_NOTES -> setAdapterData(noteList)
+                    Utility.NOTE_GOALS -> setAdapterData(goalList)
+                }
             }
         })
 
@@ -130,12 +127,16 @@ class NoteFragment : Fragment(), NoteItemClickListener {
                 NoteModel(
                     noteTitle = "",
                     noteContent = "",
-//                    noteDate = formatDate(SimpleDateFormat("yyyy-MM-dd").parse("2014-2-10"), "MMM dd, yyyy"),
                     noteDate = formatDate(Date(), "MMM dd, yyyy"),
                     noteType = getNoteType()
                 ), Utility.NOTE_CREATING_MODE
             )
         }
+    }
+
+    private fun changeVisibility(visibility: Int) {
+        fragment_note_logo_text.visibility = visibility
+        fragment_note_logo.visibility = visibility
     }
 
     private fun initRecyclerView() {
@@ -146,22 +147,33 @@ class NoteFragment : Fragment(), NoteItemClickListener {
     private fun prepareNotes(notes: List<NoteModel>) {
         noteList = mutableListOf()
         goalList = mutableListOf()
-        Log.d("NoteFragment", "Inside getAllNotes() 3")
         for (note in notes) {
             if (note.noteType == Utility.NOTE_NOTES) {
-                Log.d("NoteFragment", "Note: ${note.noteTitle}")
                 noteList.add(note)
             } else if (note.noteType == Utility.NOTE_GOALS) {
-                Log.d("NoteFragment", "Goal: ${note.noteTitle}")
                 goalList.add(note)
             }
         }
-        Log.d("NoteFragment", "noteList size: ${noteList.size}")
-        Log.d("NoteFragment", "goalList size: ${goalList.size}")
     }
 
     private fun setAdapterData(notes: List<NoteModel>) {
+        if (notes.isEmpty()) {
+            changeVisibility(View.VISIBLE)
+            getStartingText()
+        } else {
+            fragment_note_recycler_view.visibility = View.VISIBLE
+        }
+
         adapter.setData(notes as MutableList<NoteModel>)
+    }
+
+    private fun getStartingText() {
+        when (getNoteType()) {
+            Utility.NOTE_NOTES -> fragment_note_logo_text.text =
+                "Your notes will appear here"
+            Utility.NOTE_GOALS -> fragment_note_logo_text.text =
+                "Your goals will appear here"
+        }
     }
 
     private fun openAddNoteActivity(
