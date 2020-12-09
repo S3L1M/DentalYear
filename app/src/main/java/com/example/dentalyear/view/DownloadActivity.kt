@@ -1,5 +1,7 @@
 package com.example.dentalyear.view
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -7,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dentalyear.R
 import com.example.dentalyear.data.model.VideoModel
+import com.example.dentalyear.utils.DownloadedVideoItemClickListener
 import com.example.dentalyear.utils.Status
 import com.example.dentalyear.utils.Utility
 import com.example.dentalyear.utils.asVideoDatabaseModel
@@ -21,7 +24,7 @@ import java.io.File
 
 
 @AndroidEntryPoint
-class DownloadActivity : AppCompatActivity() {
+class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
     private lateinit var adapter: DownloadAdapter
     private lateinit var viewModel: MainViewModel
     private var videos = mutableListOf<VideoModel>()
@@ -61,7 +64,7 @@ class DownloadActivity : AppCompatActivity() {
     }
 
     private fun initRecyclerView() {
-        adapter = DownloadAdapter()
+        adapter = DownloadAdapter(this)
         activity_download_recycler_view.adapter = adapter
     }
 
@@ -79,6 +82,19 @@ class DownloadActivity : AppCompatActivity() {
 //            adapter.setData(videos)
         }
 
+    }
+
+    override fun onDownloadedVideoClicked(data: VideoModel) {
+//        val intent = Intent()
+//        intent.putExtra("ASD", data)
+//        setResult(1, intent)
+//        finish()
+//        VideoFragment.myVideo = data
+//        finish()
+        val intent = Intent()
+        intent.putExtra("ASD", data)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
     private fun isIntentExists() =

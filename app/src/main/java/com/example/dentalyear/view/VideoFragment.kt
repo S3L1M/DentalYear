@@ -1,5 +1,6 @@
 package com.example.dentalyear.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -30,10 +31,12 @@ class VideoFragment : Fragment(), VideoItemClickListener {
     companion object {
         const val VIDEO_POSITION = "video_position"
         const val VIDEO_DATA = "video_data"
+        var myVideo: VideoModel? = null
     }
 
     private lateinit var adapter: VideoAdapter
     private lateinit var video: VideoModel
+    private lateinit var videos: List<VideoModel>
     private val funVibesList = mutableListOf<VideoModel>()
     private val oralHealthTipsList = mutableListOf<VideoModel>()
     private val smileQuotesList = mutableListOf<VideoModel>()
@@ -74,8 +77,9 @@ class VideoFragment : Fragment(), VideoItemClickListener {
                     Log.d("DownloadActivity", "HERE 3")
                     video_fragment_progressbar.visibility = View.INVISIBLE
                     changeViewVisibility(View.VISIBLE)
+                    this.videos = videos.data!!
                     // Prepare data
-                    prepareData(videos.data!!)
+                    prepareData(videos.data)
                     // Set the default data to funVibes
                     setAdapterData(funVibesList)
                 }
@@ -119,6 +123,10 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         // open saved videos
         video_fragment_save_image_button.setOnClickListener {
             openDownloadVideoActivity()
+        }
+
+        if (myVideo != null) {
+            Log.d("VideoFragment", "JRTRTRTR 1231231")
         }
     }
 
@@ -186,7 +194,27 @@ class VideoFragment : Fragment(), VideoItemClickListener {
             intent.putExtra(VIDEO_POSITION, position)
             intent.putExtra(VIDEO_DATA, data)
         }
-        startActivity(intent)
+        startActivityForResult(intent, 1)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+                val myVideo = data.getParcelableExtra<VideoModel>("ASD")
+                when(video_fragment_tabLayout.selectedTabPosition){
+                    0->chooseVideo(myVideo!!, 0)
+                    1->chooseVideo(myVideo!!, 1)
+                    2->chooseVideo(myVideo!!, 2)
+                }
+                Log.d("VideoFragment", "${myVideo?.videoTitle}")
+            }
+        }
+    }
+
+    private fun chooseVideo(video: VideoModel, position: Int){
+        video_fragment_tabLayout.getTabAt(position)?.select()
+        onVideoItemClicked(0, video)
     }
 
     override fun onVideoItemClicked(position: Int, data: VideoModel) {

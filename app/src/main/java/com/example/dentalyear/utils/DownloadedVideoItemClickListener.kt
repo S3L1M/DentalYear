@@ -6,5 +6,5 @@ import com.example.dentalyear.view.adapter.ExhibitAdapter
 import com.example.dentalyear.view.adapter.VideoAdapter
 
 interface DownloadedVideoItemClickListener {
-    fun onDownloadedVideoClicked(holder: VideoAdapter.VideoViewHolder, data: VideoModel)
+    fun onDownloadedVideoClicked(data: VideoModel)
 }
