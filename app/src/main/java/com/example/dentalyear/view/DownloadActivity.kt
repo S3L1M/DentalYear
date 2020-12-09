@@ -25,6 +25,8 @@ class DownloadActivity : AppCompatActivity() {
     private lateinit var adapter: DownloadAdapter
     private lateinit var viewModel: MainViewModel
     private var videos = mutableListOf<VideoModel>()
+    private var isDownloaded = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,6 +99,7 @@ class DownloadActivity : AppCompatActivity() {
     }
 
     private fun startDownload(data: VideoModel) {
+
         activity_download_downloading_item.visibility = View.VISIBLE
         downloading_recycler_view_video_title.text = data.videoTitle
         downloading_recycler_view_video_duration.text = data.videoDuration
@@ -119,22 +122,22 @@ class DownloadActivity : AppCompatActivity() {
             .setCallback { e, file ->
                 run {
                     if (e == null) {
-                        data.downloadStatus = Utility.DOWNLOADED
-                        Log.d("DownloadActivity", "$data")
-                        viewModel.updateVideo(data.asVideoDatabaseModel())
-                        videos.add(data)
-//                        adapter.addItem(data)
-                        adapter.setData(videos)
-                        activity_download_downloading_item.visibility = View.GONE
-                        Log.d("DownloadActivity", "${data.asVideoDatabaseModel()}")
-//                        viewModel.refreshVideos()
-                        Log.d("DownloadActivity", "File: ${file.absoluteFile}")
-                        Snackbar.make(
-                            activity_download_container,
-                            "File downloaded successfully",
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-                        Log.d("Download debug", "download finished")
+                        if(!isDownloaded) {
+                            data.downloadStatus = Utility.DOWNLOADED
+                            Log.d("DownloadActivity", "$data")
+                            viewModel.updateVideo(data.asVideoDatabaseModel())
+                            videos.add(data)
+                            adapter.addItem(data)
+                            activity_download_downloading_item.visibility = View.GONE
+                            Log.d("DownloadActivity", "${data.asVideoDatabaseModel()}")
+                            Log.d("DownloadActivity", "File: ${file.absoluteFile}")
+                            Snackbar.make(
+                                activity_download_container,
+                                "File downloaded successfully",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                            isDownloaded = true
+                        }
                     }
                 }
             }
