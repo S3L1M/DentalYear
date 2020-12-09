@@ -57,9 +57,15 @@ class AddNoteActivity : AppCompatActivity() {
                         updateNote(newNote)
                     }
                 }
+                finish()
             } else {
                 Toast.makeText(this, "title and content can't be empty", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        // Listen for back button
+        activity_add_note_back_image_view.setOnClickListener {
+            finish()
         }
     }
 

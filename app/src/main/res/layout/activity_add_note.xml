@@ -24,12 +24,13 @@
 
     <ImageView
         android:id="@+id/activity_add_note_back_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_margin="8dp"
         android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/colorNavUnSelected" />
 
     <ImageView
         android:id="@+id/activity_add_note_save_image_view"
@@ -44,6 +45,7 @@
         android:id="@+id/activity_add_note_note_date_image_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="Jul 16,2020"
         android:textColor="@color/colorPrimary"
         android:textSize="24sp"
@@ -64,7 +66,7 @@
     <LinearLayout
         android:id="@+id/activity_add_note_title_container"
         android:layout_width="match_parent"
-        android:layout_height="84dp"
+        android:layout_height="128dp"
         android:background="@drawable/bottom_left_curve_background"
         android:backgroundTint="@color/colorExhibitBackground"
         android:padding="20dp"
@@ -78,20 +80,22 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:autofillHints="Enter title"
+            android:background="@android:color/transparent"
             android:hint="Enter title"
             android:inputType="text"
             android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorWhite" />
+            android:textColorHint="@color/colorWhite"
+            android:textSize="22sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/activity_add_note_content_container"
         android:layout_width="match_parent"
-        android:layout_height="128dp"
+        android:layout_height="256dp"
         android:background="@drawable/bottom_left_curve_background"
         android:backgroundTint="@color/colorAaddNoteContentEditTextBackground"
-        android:padding="20dp"
+        android:padding="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/activity_add_note_title_container">
@@ -102,10 +106,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:autofillHints="Your note..."
+            android:background="@android:color/transparent"
             android:hint="Your note..."
-            android:inputType="text"
+            android:inputType="textMultiLine"
             android:textColor="@color/colorWhite"
-            android:textColorHint="@color/colorWhite" />
+            android:textColorHint="@color/colorWhite"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
