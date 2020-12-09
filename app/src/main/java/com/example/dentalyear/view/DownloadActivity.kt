@@ -24,6 +24,7 @@ import java.io.File
 class DownloadActivity : AppCompatActivity() {
     private lateinit var adapter: DownloadAdapter
     private lateinit var viewModel: MainViewModel
+    private var videos = mutableListOf<VideoModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,6 +63,8 @@ class DownloadActivity : AppCompatActivity() {
     }
 
     private fun downloadNewVideoOrShowData(videos: List<VideoModel>) {
+        this.videos = videos as MutableList<VideoModel>
+        adapter.setData(videos)
         if (isIntentExists()) {
             intent.extras?.getParcelable<VideoModel>(VideoFragment.VIDEO_DATA)?.let {
                 startDownload(it)
@@ -69,7 +72,8 @@ class DownloadActivity : AppCompatActivity() {
         } else {
             Log.d("DownloadActivity", "HERE 1234")
             Log.d("DownloadActivity", "${videos.size}")
-            adapter.setData(videos as MutableList<VideoModel>)
+//            this.videos = videos as MutableList<VideoModel>
+//            adapter.setData(videos)
         }
 
     }
@@ -115,9 +119,11 @@ class DownloadActivity : AppCompatActivity() {
                 run {
                     if (e == null) {
                         data.downloadStatus = Utility.DOWNLOADED
-                        adapter.addItem(data)
                         Log.d("DownloadActivity", "$data")
                         viewModel.updateVideo(data.asVideoDatabaseModel())
+                        videos.add(data)
+//                        adapter.addItem(data)
+                        adapter.setData(videos)
                         activity_download_downloading_item.visibility = View.GONE
                         Log.d("DownloadActivity", "${data.asVideoDatabaseModel()}")
 //                        viewModel.refreshVideos()
