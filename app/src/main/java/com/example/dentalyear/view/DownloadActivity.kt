@@ -133,7 +133,7 @@ class DownloadActivity : AppCompatActivity() {
                             activity_download_container,
                             "File downloaded successfully",
                             Snackbar.LENGTH_SHORT
-                        )
+                        ).show()
                         Log.d("Download debug", "download finished")
                     }
                 }
