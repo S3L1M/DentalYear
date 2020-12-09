@@ -44,11 +44,12 @@ class DownloadAdapter(
 
     fun addItem(item: VideoModel) {
         data.add(item)
-        notifyItemInserted(0)
+        notifyItemInserted(data.size-1)
     }
 
     fun setData(data: MutableList<VideoModel>) {
         this.data = data
+        notifyDataSetChanged()
     }
 
     class DownloadViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
