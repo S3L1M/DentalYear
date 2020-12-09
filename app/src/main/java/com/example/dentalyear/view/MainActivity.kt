@@ -1,6 +1,9 @@
 package com.example.dentalyear.view
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
@@ -98,5 +101,12 @@ class MainActivity : AppCompatActivity() {
         mExhibitsTextView.setTextColor(defaultColor)
         mVideoTextView.setTextColor(defaultColor)
         tv.setTextColor(getColor(R.color.colorNavSelected))
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK && requestCode == 1){
+            Log.d("MainActivity", "HERE from main 1")
+        }
     }
 }

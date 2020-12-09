@@ -1,5 +1,7 @@
 package com.example.dentalyear.view
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -43,16 +45,13 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
         viewModel.getVideos()?.observe(this, { videos ->
             when (videos.status) {
                 Status.LOADING -> {
-                    Log.d("DownloadActivity", "Loading...")
                 }
                 Status.SUCCESS -> {
                     Log.d("DownloadActivity", "${videos.data?.size}")
                     videos.data?.let {
-                        Log.d("DownloadActivity", "Inside ***")
                         downloadNewVideoOrShowData(getDownloadedVideos(videos.data))
                         adapter.setData(getDownloadedVideos((videos.data)))
                     }
-                    Log.d("DownloadActivity", "Success...")
                 }
                 Status.ERROR -> {
                 }
@@ -73,13 +72,14 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
             intent.extras?.getParcelable<VideoModel>(VideoFragment.VIDEO_DATA)?.let {
                 startDownload(it)
             }
-        } else {
-            Log.d("DownloadActivity", "HERE 1234")
-            Log.d("DownloadActivity", "${videos.size}")
-//            this.videos = videos as MutableList<VideoModel>
-//            adapter.setData(videos)
         }
+    }
 
+    override fun onDownloadedVideoClicked(data: VideoModel) {
+        val intent = Intent()
+        intent.putExtra("ASD", data)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
     private fun isIntentExists() =
@@ -90,9 +90,7 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
     private fun getDownloadedVideos(videos: List<VideoModel>): MutableList<VideoModel> {
         val downloadedVideos = mutableListOf<VideoModel>()
         for (video in videos) {
-            Log.d("DownloadActivity", "Outside: ${video.downloadStatus}")
             if (video.downloadStatus == Utility.DOWNLOADED) {
-                Log.d("DownloadActivity", "Inside: ${video.videoTitle}")
                 downloadedVideos.add(video)
             }
         }
@@ -104,13 +102,11 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
         activity_download_downloading_item.visibility = View.VISIBLE
         downloading_recycler_view_video_title.text = data.videoTitle
         downloading_recycler_view_video_duration.text = data.videoDuration
-        Log.d("DownloadActivity", "Start downloading...")
         Ion.getDefault(this).conscryptMiddleware.enable(false)
         Ion.with(this)
             .load(data.videoDownloadLink)
             .progress { downloaded, total ->
                 run {
-                    Log.d("DownloadActivity", "Progress: ${100.0 * downloaded / total}")
                     runOnUiThread {
                         downloading_recycler_view_video_current_size.text = (downloaded/1048576).toString()
                         downloading_recycler_view_total_downloaded_size.text = (total/1048576).toString()
@@ -123,15 +119,12 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
             .setCallback { e, file ->
                 run {
                     if (e == null) {
-                        if(!isDownloaded) {
+                        if (!isDownloaded) {
                             data.downloadStatus = Utility.DOWNLOADED
-                            Log.d("DownloadActivity", "$data")
                             viewModel.updateVideo(data.asVideoDatabaseModel())
                             videos.add(data)
                             adapter.addItem(data)
                             activity_download_downloading_item.visibility = View.GONE
-                            Log.d("DownloadActivity", "${data.asVideoDatabaseModel()}")
-                            Log.d("DownloadActivity", "File: ${file.absoluteFile}")
                             Snackbar.make(
                                 activity_download_container,
                                 "File downloaded successfully",
@@ -154,10 +147,6 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
         } catch (e: Exception) {
             ""
         }
-    }
-
-    override fun onDownloadedVideoClicked(video: VideoModel) {
-
     }
 
     fun back(v: View) = finish()

@@ -1,5 +1,6 @@
 package com.example.dentalyear.view
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -187,10 +188,30 @@ class VideoFragment : Fragment(), VideoItemClickListener {
             intent.putExtra(VIDEO_POSITION, position)
             intent.putExtra(VIDEO_DATA, data)
         }
-        startActivity(intent)
+        startActivityForResult(intent, 1)
     }
 
-    override fun onVideoItemClicked(data: VideoModel) {  //TODO Reuse this function
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK && data != null) {
+                val myVideo = data.getParcelableExtra<VideoModel>("ASD")
+                when(video_fragment_tabLayout.selectedTabPosition){
+                    0->chooseVideo(myVideo!!, 0)
+                    1->chooseVideo(myVideo!!, 1)
+                    2->chooseVideo(myVideo!!, 2)
+                }
+                Log.d("VideoFragment", "${myVideo?.videoTitle}")
+            }
+        }
+    }
+
+    private fun chooseVideo(video: VideoModel, position: Int){
+        video_fragment_tabLayout.getTabAt(position)?.select()
+        onVideoItemClicked(video)
+    }
+
+    override fun onVideoItemClicked(data: VideoModel) {
         // release player if the user click on another video
         releasePlayer()
         setVideoData(data)

@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dentalyear.R
 import com.example.dentalyear.data.model.VideoModel
 import com.example.dentalyear.utils.DownloadedVideoItemClickListener
-import com.example.dentalyear.utils.VideoItemClickListener
 
 class DownloadAdapter(
     private val itemClicked: DownloadedVideoItemClickListener,
@@ -26,20 +25,9 @@ class DownloadAdapter(
         val video = data[position]
         holder.videoTitle.text = video.videoTitle
         holder.videoDuration.text = "Duration: ${video.videoDuration}"
-        holder.itemView.setOnClickListener{itemClicked.onDownloadedVideoClicked(video)}
-
-//        if (currentDownloadingStatus == Utility.DOWNLOADING && position == 0) {
-//            holder.downloadingProgressBar.visibility = View.VISIBLE
-//            holder.currentSizeTextView.visibility = View.VISIBLE
-//            holder.totalSizeTextView.visibility = View.VISIBLE
-//            holder.dashTextView.visibility = View.VISIBLE
-//        } else {
-//            holder.downloadingProgressBar.visibility = View.INVISIBLE
-//            holder.downloadingProgressBar.visibility = View.INVISIBLE
-//            holder.currentSizeTextView.visibility = View.INVISIBLE
-//            holder.totalSizeTextView.visibility = View.INVISIBLE
-//            holder.dashTextView.visibility = View.INVISIBLE
-//        }
+        holder.itemView.setOnClickListener{
+            itemClicked.onDownloadedVideoClicked(video)
+        }
     }
 
 
