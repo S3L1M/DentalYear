@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dentalyear.R
 import com.example.dentalyear.data.model.VideoModel
+import com.example.dentalyear.utils.DownloadedVideoItemClickListener
 import com.example.dentalyear.utils.Status
 import com.example.dentalyear.utils.Utility
 import com.example.dentalyear.utils.asVideoDatabaseModel
 import com.example.dentalyear.view.adapter.DownloadAdapter
+import com.example.dentalyear.view.adapter.VideoAdapter
 import com.example.dentalyear.viewmodel.MainViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.koushikdutta.ion.Ion
@@ -21,7 +23,7 @@ import java.io.File
 
 
 @AndroidEntryPoint
-class DownloadActivity : AppCompatActivity() {
+class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
     private lateinit var adapter: DownloadAdapter
     private lateinit var viewModel: MainViewModel
     private var videos = mutableListOf<VideoModel>()
@@ -154,4 +156,10 @@ class DownloadActivity : AppCompatActivity() {
             ""
         }
     }
+
+    override fun onDownloadedVideoClicked(holder: VideoAdapter.VideoViewHolder, data: VideoModel) {
+        TODO("Not yet implemented")
+    }
+
+    fun back(v: View) = finish()
 }
