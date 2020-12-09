@@ -17,10 +17,11 @@ class MainRepository @Inject constructor(
 ) {
 
     val promptsLiveData = MutableLiveData<Resource<List<HomeModel>>>()
-    val categoryWithVideosLiveData = MutableLiveData<Resource<List<VideoModel>>>()
+    var categoryWithVideosLiveData = MutableLiveData<Resource<List<VideoModel>>>()
 
     // Get videos list | return liveData of videos
     suspend fun getVideos() {
+        categoryWithVideosLiveData = MutableLiveData<Resource<List<VideoModel>>>()
         Log.d("DownloadActivity", "HERE 5")
         val source = database.videoDao().getVideos()
         Log.d("DownloadActivity", "source: ${source.size}")

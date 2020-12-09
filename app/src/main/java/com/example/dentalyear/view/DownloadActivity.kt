@@ -25,6 +25,8 @@ class DownloadActivity : AppCompatActivity() {
     private lateinit var adapter: DownloadAdapter
     private lateinit var viewModel: MainViewModel
     private var videos = mutableListOf<VideoModel>()
+    private var isDownloaded = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,10 +99,12 @@ class DownloadActivity : AppCompatActivity() {
     }
 
     private fun startDownload(data: VideoModel) {
+
         activity_download_downloading_item.visibility = View.VISIBLE
         downloading_recycler_view_video_title.text = data.videoTitle
         downloading_recycler_view_video_duration.text = data.videoDuration
         Log.d("DownloadActivity", "Start downloading...")
+        Ion.getDefault(this).conscryptMiddleware.enable(false)
         Ion.with(this)
             .load(data.videoDownloadLink)
             .progress { downloaded, total ->
@@ -111,7 +115,6 @@ class DownloadActivity : AppCompatActivity() {
                         downloading_recycler_view_total_downloaded_size.text = (total/1048576).toString()
                         downloading_recycler_view_video_progress_bar.progress =
                             (100.0 * downloaded / total).toInt()
-
                     }
                 }
             }
@@ -119,21 +122,22 @@ class DownloadActivity : AppCompatActivity() {
             .setCallback { e, file ->
                 run {
                     if (e == null) {
-                        data.downloadStatus = Utility.DOWNLOADED
-                        Log.d("DownloadActivity", "$data")
-                        viewModel.updateVideo(data.asVideoDatabaseModel())
-                        videos.add(data)
-//                        adapter.addItem(data)
-                        adapter.setData(videos)
-                        activity_download_downloading_item.visibility = View.GONE
-                        Log.d("DownloadActivity", "${data.asVideoDatabaseModel()}")
-//                        viewModel.refreshVideos()
-                        Log.d("DownloadActivity", "File: ${file.absoluteFile}")
-                        Snackbar.make(
-                            activity_download_container,
-                            "File downloaded successfully",
-                            Snackbar.LENGTH_SHORT
-                        )
+                        if(!isDownloaded) {
+                            data.downloadStatus = Utility.DOWNLOADED
+                            Log.d("DownloadActivity", "$data")
+                            viewModel.updateVideo(data.asVideoDatabaseModel())
+                            videos.add(data)
+                            adapter.addItem(data)
+                            activity_download_downloading_item.visibility = View.GONE
+                            Log.d("DownloadActivity", "${data.asVideoDatabaseModel()}")
+                            Log.d("DownloadActivity", "File: ${file.absoluteFile}")
+                            Snackbar.make(
+                                activity_download_container,
+                                "File downloaded successfully",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                            isDownloaded = true
+                        }
                     }
                 }
             }
