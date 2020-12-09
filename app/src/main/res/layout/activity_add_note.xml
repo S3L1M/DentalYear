@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAppBackground"
+    tools:context=".view.AddNoteActivity">
+
+    <LinearLayout
+        android:id="@+id/activity_add_note_top_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/top_bar_height"
+        android:background="@color/colorExhibitBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_bar_height"
+            android:background="@drawable/bottom_left_curve_top_bar" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/activity_add_note_back_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/activity_add_note_save_image_view"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_margin="12dp"
+        android:src="@drawable/old_save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/activity_add_note_note_date_image_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Jul 16,2020"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@id/activity_add_note_back_image_view"
+        app:layout_constraintTop_toBottomOf="@id/activity_add_note_back_image_view" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/colorAaddNoteContentEditTextBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_add_note_title_container"
+        app:layout_constraintEnd_toEndOf="@+id/activity_add_note_title_container"
+        app:layout_constraintStart_toStartOf="@+id/activity_add_note_title_container"
+        app:layout_constraintTop_toBottomOf="@+id/activity_add_note_top_app_bar" />
+
+    <LinearLayout
+        android:id="@+id/activity_add_note_title_container"
+        android:layout_width="match_parent"
+        android:layout_height="84dp"
+        android:background="@drawable/bottom_left_curve_background"
+        android:backgroundTint="@color/colorExhibitBackground"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_add_note_top_app_bar">
+
+        <EditText
+            android:id="@+id/activity_add_note_title_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:autofillHints="Enter title"
+            android:hint="Enter title"
+            android:inputType="text"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activity_add_note_content_container"
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:background="@drawable/bottom_left_curve_background"
+        android:backgroundTint="@color/colorAaddNoteContentEditTextBackground"
+        android:padding="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/activity_add_note_title_container">
+
+        <EditText
+            android:id="@+id/activity_add_note_content_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:autofillHints="Your note..."
+            android:hint="Your note..."
+            android:inputType="text"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorWhite" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
