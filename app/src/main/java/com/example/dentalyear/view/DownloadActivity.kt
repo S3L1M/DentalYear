@@ -101,6 +101,7 @@ class DownloadActivity : AppCompatActivity() {
         downloading_recycler_view_video_title.text = data.videoTitle
         downloading_recycler_view_video_duration.text = data.videoDuration
         Log.d("DownloadActivity", "Start downloading...")
+        Ion.getDefault(this).conscryptMiddleware.enable(false)
         Ion.with(this)
             .load(data.videoDownloadLink)
             .progress { downloaded, total ->
@@ -111,7 +112,6 @@ class DownloadActivity : AppCompatActivity() {
                         downloading_recycler_view_total_downloaded_size.text = (total/1048576).toString()
                         downloading_recycler_view_video_progress_bar.progress =
                             (100.0 * downloaded / total).toInt()
-
                     }
                 }
             }
@@ -134,6 +134,7 @@ class DownloadActivity : AppCompatActivity() {
                             "File downloaded successfully",
                             Snackbar.LENGTH_SHORT
                         )
+                        Log.d("Download debug", "download finished")
                     }
                 }
             }
