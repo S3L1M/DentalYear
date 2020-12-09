@@ -65,6 +65,10 @@ class MainActivity : AppCompatActivity() {
         setSelectedTextColor(mNotesTextView)
 
         // Inflate Notes fragment
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<NoteFragment>(R.id.nav_host_fragment)
+        }
     }
 
     private fun showExhibits() {

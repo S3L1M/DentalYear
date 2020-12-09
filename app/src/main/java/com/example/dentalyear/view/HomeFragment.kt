@@ -15,6 +15,7 @@ import com.example.dentalyear.data.model.HomeModel
 import com.example.dentalyear.utils.HomeTopBarClickListener
 import com.example.dentalyear.utils.Status
 import com.example.dentalyear.utils.Utility
+import com.example.dentalyear.utils.Utility.Companion.formatDate
 import com.example.dentalyear.view.adapter.HomeAdapter
 import com.example.dentalyear.viewmodel.MainViewModel
 import com.google.android.material.datepicker.CalendarConstraints
@@ -211,10 +212,6 @@ class HomeFragment : Fragment(), HomeTopBarClickListener {
             formatDate(calendar.time, "EEEE"),
             formatDate(calendar.time, "MMMM dd")
         )
-    }
-
-    private fun formatDate(date: Date, format: String = "yyyyMMdd"): String {
-        return SimpleDateFormat(format).format(date)
     }
 
     private fun initDatePicker() {

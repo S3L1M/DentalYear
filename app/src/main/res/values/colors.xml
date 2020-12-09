@@ -23,4 +23,5 @@
     <color name="colorExhibitBackground">#52ADCE</color>
     <color name="colorExhibitDetailsButtonBackground">#8DD5EF</color>
     <color name="colorSettingsAppBarBackground">#81CDE8</color>
+    <color name="colorAaddNoteContentEditTextBackground">#8AC9DF</color>
 </resources>

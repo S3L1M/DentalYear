@@ -86,7 +86,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         })
 
         /*
-         * Init view listener
+         * Init view listeners
          */
         // thumbnail click listener
         video_fragment_video_thumbnail.setOnClickListener {
