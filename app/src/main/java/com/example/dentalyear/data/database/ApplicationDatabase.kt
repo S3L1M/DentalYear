@@ -7,12 +7,13 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.dentalyear.utils.DataConverter
 
-@Database(entities = [HomeModelCached::class, VideoModelCached::class], version = 1, exportSchema = true)
+@Database(entities = [HomeModelCached::class, VideoModelCached::class, NoteModel::class], version = 1, exportSchema = true)
 @TypeConverters(DataConverter::class)
 abstract class ApplicationDatabase : RoomDatabase() {
 
     abstract fun homeDao(): HomeDao
     abstract fun videoDao(): VideoDao
+    abstract fun noteDao(): NoteDao
 
     companion object {
         @Volatile

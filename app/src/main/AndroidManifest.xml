@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.DownloadActivity"></activity>
+        <activity android:name=".view.AddNoteActivity"></activity>
+        <activity android:name=".view.DownloadActivity" />
         <activity android:name=".view.SettingsActivity" />
         <activity android:name=".view.SplashScreenActivity">
             <intent-filter>

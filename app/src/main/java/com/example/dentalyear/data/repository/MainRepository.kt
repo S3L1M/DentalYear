@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
 import com.example.dentalyear.data.api.DentalApi
 import com.example.dentalyear.data.database.ApplicationDatabase
+import com.example.dentalyear.data.database.NoteModel
 import com.example.dentalyear.data.database.VideoModelCached
 import com.example.dentalyear.data.model.HomeModel
 import com.example.dentalyear.data.model.VideoModel
@@ -43,7 +44,7 @@ class MainRepository @Inject constructor(
         }
     }
 
-    suspend fun updateVideo(video: VideoModelCached){
+    suspend fun updateVideo(video: VideoModelCached) {
         database.videoDao().updateVideo(video)
     }
 
@@ -72,5 +73,11 @@ class MainRepository @Inject constructor(
         }
 
     }
+
+    suspend fun insertNote(note: NoteModel) = database.noteDao().insertNote(note)
+    suspend fun deleteNote(note: NoteModel) = database.noteDao().deleteNote(note)
+    suspend fun updateNote(note: NoteModel) = database.noteDao().updateNote(note)
+    suspend fun getNote(id: Int) = database.noteDao().getNote(id)
+    fun getAllNotes() = database.noteDao().getAllNotes()
 
 }

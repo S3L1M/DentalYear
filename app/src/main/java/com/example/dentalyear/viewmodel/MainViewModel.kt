@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.dentalyear.data.database.NoteModel
 import com.example.dentalyear.data.database.VideoModelCached
 import com.example.dentalyear.data.model.ExhibitModel
 import com.example.dentalyear.data.model.HomeModel
@@ -19,6 +20,7 @@ class MainViewModel @ViewModelInject constructor(
     private var videoLiveData: LiveData<Resource<List<VideoModel>>>? = null
     private var exhibitLiveData: LiveData<Resource<List<ExhibitModel>>>? = null
     private var promptLiveData: LiveData<Resource<List<HomeModel>>>? = null
+    private var noteLiveData: LiveData<List<NoteModel>>? = null
 
 
     fun getVideos(): LiveData<Resource<List<VideoModel>>>? {
@@ -31,14 +33,14 @@ class MainViewModel @ViewModelInject constructor(
         return videoLiveData
     }
 
-    fun updateVideo(video: VideoModelCached){
+    fun updateVideo(video: VideoModelCached) {
         viewModelScope.launch {
             mainRepository.updateVideo(video)
 //            mainRepository.getVideos()
         }
     }
 
-    fun refreshVideos(){
+    fun refreshVideos() {
         viewModelScope.launch {
             mainRepository.getVideos()
         }
@@ -67,5 +69,30 @@ class MainViewModel @ViewModelInject constructor(
         viewModelScope.launch {
             mainRepository.getPrompts(filterKey)
         }
+    }
+
+    fun insertNote(note: NoteModel) = viewModelScope.launch {
+        mainRepository.insertNote(note)
+    }
+
+    fun deleteNote(note: NoteModel) = viewModelScope.launch {
+        mainRepository.deleteNote(note)
+    }
+
+    fun updateNote(note: NoteModel) = viewModelScope.launch {
+        mainRepository.updateNote(note)
+    }
+
+    fun getNote(id: Int) = viewModelScope.launch {
+        mainRepository.getNote(id)
+    }
+
+    fun getAllNotes(): LiveData<List<NoteModel>>? {
+        if (noteLiveData == null) {
+            viewModelScope.launch {
+               noteLiveData = mainRepository.getAllNotes()
+            }
+        }
+        return noteLiveData
     }
 }
