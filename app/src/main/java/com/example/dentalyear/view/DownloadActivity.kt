@@ -77,7 +77,7 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
 
     override fun onDownloadedVideoClicked(data: VideoModel) {
         val intent = Intent()
-        intent.putExtra("ASD", data)
+        intent.putExtra(VideoFragment.VIDEO_MODEL, data)
         setResult(Activity.RESULT_OK, intent)
         finish()
     }
