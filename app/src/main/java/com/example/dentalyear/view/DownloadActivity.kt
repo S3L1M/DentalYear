@@ -121,6 +121,7 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
                     if (e == null) {
                         if (!isDownloaded) {
                             data.downloadStatus = Utility.DOWNLOADED
+                            data.videoLink = file.absolutePath
                             viewModel.updateVideo(data.asVideoDatabaseModel())
                             videos.add(data)
                             adapter.addItem(data)
