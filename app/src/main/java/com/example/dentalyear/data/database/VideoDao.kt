@@ -14,6 +14,6 @@ abstract class VideoDao {
     @Insert
     abstract suspend fun insertVideos(videos: List<VideoModelCached>)
 
-    @Query("SELECT * FROM VideoModelCached")
+    @Query("SELECT * FROM VideoModelCached ORDER BY date DESC")
     abstract suspend fun getVideos(): List<VideoModelCached>
 }
