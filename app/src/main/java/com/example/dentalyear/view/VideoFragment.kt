@@ -195,7 +195,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 1) {
             if (resultCode == Activity.RESULT_OK && data != null) {
-                val myVideo = data.getParcelableExtra<VideoModel>("ASD")
+                val myVideo = data.getParcelableExtra<VideoModel>(VIDEO_MODEL)
                 when(video_fragment_tabLayout.selectedTabPosition){
                     0->chooseVideo(myVideo!!, 0)
                     1->chooseVideo(myVideo!!, 1)

@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.example.dentalyear.R
@@ -77,7 +78,7 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
 
     override fun onDownloadedVideoClicked(data: VideoModel) {
         val intent = Intent()
-        intent.putExtra("ASD", data)
+        intent.putExtra(VideoFragment.VIDEO_MODEL, data)
         setResult(Activity.RESULT_OK, intent)
         finish()
     }
@@ -108,8 +109,9 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
             .progress { downloaded, total ->
                 run {
                     runOnUiThread {
+                        findViewById<TextView>(R.id.downloading_recycler_view_video_dash).visibility = TextView.VISIBLE
                         downloading_recycler_view_video_current_size.text = (downloaded/1048576).toString()
-                        downloading_recycler_view_total_downloaded_size.text = (total/1048576).toString()
+                        downloading_recycler_view_total_downloaded_size.text = (total/1048576).toString() + " MB"
                         downloading_recycler_view_video_progress_bar.progress =
                             (100.0 * downloaded / total).toInt()
                     }
@@ -121,6 +123,7 @@ class DownloadActivity : AppCompatActivity(), DownloadedVideoItemClickListener {
                     if (e == null) {
                         if (!isDownloaded) {
                             data.downloadStatus = Utility.DOWNLOADED
+                            data.videoLink = file.absolutePath
                             viewModel.updateVideo(data.asVideoDatabaseModel())
                             videos.add(data)
                             adapter.addItem(data)
