@@ -46,6 +46,7 @@ class DownloadActivity : AppCompatActivity() {
                     videos.data?.let {
                         Log.d("DownloadActivity", "Inside ***")
                         downloadNewVideoOrShowData(getDownloadedVideos(videos.data))
+                        adapter.setData(getDownloadedVideos((videos.data)))
                     }
                     Log.d("DownloadActivity", "Success...")
                 }
