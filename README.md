@@ -3,9 +3,10 @@
 ## Screenshots
 | Home | Notes | Exhibits | Video | Settings |
 |------|-------|----------|-------|----------|
-|![](/screenshots/home.png)| |![](/screenshots/exhibit.png)| ![](/screenshots/video.png) | ![](/screenshots/settings.png) |
-|| |![](/screenshots/exhibit_details.png)| ![](/screenshots/video2.png) | |
-|| | | ![](/screenshots/video3.png) | |
+|![](/screenshots/home1.png)| |![](/screenshots/exhibit.png)| ![](/screenshots/video.png) | ![](/screenshots/settings.png) |
+|![](/screenshots/home2.png)| |![](/screenshots/exhibit_details.png)| ![](/screenshots/video2.png) | |
+|![](/screenshots/home3.png)| | | ![](/screenshots/video3.png) | |
+|![](/screenshots/home4.png)| | | | |
 
 ## Colors
 | Name | Color
