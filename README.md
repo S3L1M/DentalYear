@@ -3,8 +3,8 @@
 ## Screenshots
 | Home | Notes | Exhibits | Video | Settings |
 |------|-------|----------|-------|----------|
-|![](/screenshots/home1.png)|![](/screenshots/notes1.png)|![](/screenshots/exhibit1.png)|![](/screenshots/video1.png)|![](/screenshots/settings1.png)|
-|![](/screenshots/home2.png)|![](/screenshots/notes2.png)|![](/screenshots/exhibit2.png)|![](/screenshots/video2.png)|![](/screenshots/settings2.png)|
+|![](/screenshots/home1.png)|![](/screenshots/notes1.png)|![](/screenshots/exhibits1.png)|![](/screenshots/video1.png)|![](/screenshots/settings1.png)|
+|![](/screenshots/home2.png)|![](/screenshots/notes2.png)|![](/screenshots/exhibits2.png)|![](/screenshots/video2.png)|![](/screenshots/settings2.png)|
 |![](/screenshots/home3.png)|![](/screenshots/notes3.png)| |![](/screenshots/video3.png)|![](/screenshots/settings3.png)|
 |![](/screenshots/home4.png)|![](/screenshots/notes4.png)| |![](/screenshots/video4.png)| |
 
