@@ -233,7 +233,7 @@ class VideoFragment : Fragment(), VideoItemClickListener {
 
     private fun setVideoData(video: VideoModel) {
         video_fragment_video_title.text = video.videoTitle
-        video_fragment_video_duration.text = video.videoDuration
+        video_fragment_video_duration.text = "Duration : " + video.videoDuration
         // Keep the video to play it when needed
         this.video = video
         setThumbnail(video.acf.thumbImage)
