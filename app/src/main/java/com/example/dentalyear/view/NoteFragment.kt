@@ -161,6 +161,7 @@ class NoteFragment : Fragment(), NoteItemClickListener {
             changeVisibility(View.VISIBLE)
             getStartingText()
         } else {
+            changeVisibility(View.INVISIBLE)
             fragment_note_recycler_view.visibility = View.VISIBLE
         }
 
