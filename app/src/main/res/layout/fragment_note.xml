@@ -19,7 +19,7 @@
         android:id="@+id/fragment_note_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="24dp"
         android:contentDescription="Hello"
         app:backgroundTint="@color/colorSettingsAppBarBackground"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,27 +32,30 @@
         style="@style/MyCustomTabTextAppearance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="64dp"
         app:layout_constraintBottom_toBottomOf="@id/fragment_note_top_app_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.333"
+        app:tabIndicatorGravity="center">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Notes" />
+            android:text="NOTES" />
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Goals" />
+            android:text="GOALS" />
     </com.google.android.material.tabs.TabLayout>
 
     <ImageView
         android:id="@+id/fragment_note_logo"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/dental_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,10 +65,10 @@
         android:id="@+id/fragment_note_logo_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="20dp"
         android:text="Your notes will appear here"
         android:textColor="@color/colorWhite"
-        android:textSize="16sp"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fragment_note_logo" />
