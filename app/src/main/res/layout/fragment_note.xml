@@ -77,6 +77,8 @@
         android:id="@+id/fragment_note_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:paddingVertical="24dp"
+        android:paddingHorizontal="4dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
